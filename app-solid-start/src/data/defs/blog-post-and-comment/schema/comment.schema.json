@@ -1,0 +1,376 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://casinelli.io/schemas/comment.schema.json",
+  "title": "Comment",
+  "description": "Schema for blog post comments with threading and moderation support",
+  "type": "object",
+  "required": ["id", "postId", "content", "createdAt", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the comment"
+    },
+    "postId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the blog post this comment belongs to"
+    },
+    "parentId": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "ID of parent comment for threaded replies (null for top-level)"
+    },
+    "rootId": {
+      "type": ["string", "null"],
+      "format": "uuid",
+      "description": "ID of the top-level comment in this thread"
+    },
+    "depth": {
+      "type": "integer",
+      "minimum": 0,
+      "maximum": 10,
+      "default": 0,
+      "description": "Nesting level (0 = top-level)"
+    },
+    "author": {
+      "oneOf": [
+        { "$ref": "#/$defs/registeredAuthor" },
+        { "$ref": "#/$defs/anonymousAuthor" }
+      ]
+    },
+    "content": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 10000,
+      "description": "Comment text content"
+    },
+    "contentFormat": {
+      "type": "string",
+      "enum": ["plaintext", "markdown", "html"],
+      "default": "plaintext"
+    },
+    "contentHtml": {
+      "type": "string",
+      "description": "Rendered HTML version of content"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["pending", "approved", "spam", "rejected", "deleted", "flagged"],
+      "description": "Moderation status"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the comment was posted"
+    },
+    "updatedAt": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "When the comment was last edited"
+    },
+    "approvedAt": {
+      "type": ["string", "null"],
+      "format": "date-time",
+      "description": "When the comment was approved"
+    },
+    "approvedBy": {
+      "type": ["string", "null"],
+      "description": "ID of moderator who approved"
+    },
+    "isEdited": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether the comment has been edited"
+    },
+    "editHistory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "content": { "type": "string" },
+          "editedAt": { "type": "string", "format": "date-time" },
+          "reason": { "type": "string" }
+        },
+        "required": ["content", "editedAt"]
+      }
+    },
+    "isPinned": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this comment is pinned to top"
+    },
+    "isAuthorReply": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a reply from the post author"
+    },
+    "isHighlighted": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this comment is highlighted/featured"
+    },
+    "reactions": {
+      "type": "object",
+      "properties": {
+        "likes": { "type": "integer", "minimum": 0, "default": 0 },
+        "dislikes": { "type": "integer", "minimum": 0, "default": 0 },
+        "hearts": { "type": "integer", "minimum": 0, "default": 0 },
+        "laughs": { "type": "integer", "minimum": 0, "default": 0 }
+      },
+      "additionalProperties": { "type": "integer", "minimum": 0 },
+      "description": "Reaction counts by type"
+    },
+    "userReactions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "userId": { "type": "string" },
+          "type": { "type": "string" },
+          "createdAt": { "type": "string", "format": "date-time" }
+        },
+        "required": ["userId", "type"]
+      },
+      "description": "Individual user reactions"
+    },
+    "replyCount": {
+      "type": "integer",
+      "minimum": 0,
+      "default": 0,
+      "description": "Number of direct replies"
+    },
+    "replies": {
+      "type": "array",
+      "items": { "$ref": "#" },
+      "description": "Nested replies (recursive)"
+    },
+    "mentions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "userId": { "type": "string" },
+          "username": { "type": "string" },
+          "startIndex": { "type": "integer" },
+          "endIndex": { "type": "integer" }
+        },
+        "required": ["userId", "username"]
+      },
+      "description": "Users mentioned in the comment"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["image", "gif", "link", "file"]
+          },
+          "url": { "type": "string", "format": "uri" },
+          "thumbnailUrl": { "type": "string", "format": "uri" },
+          "alt": { "type": "string" },
+          "filename": { "type": "string" },
+          "mimeType": { "type": "string" },
+          "size": { "type": "integer" }
+        },
+        "required": ["type", "url"]
+      },
+      "maxItems": 5,
+      "description": "Media attachments"
+    },
+    "metadata": {
+      "type": "object",
+      "properties": {
+        "ipAddress": { "type": "string" },
+        "userAgent": { "type": "string" },
+        "referrer": { "type": "string" },
+        "geoLocation": {
+          "type": "object",
+          "properties": {
+            "country": { "type": "string" },
+            "region": { "type": "string" },
+            "city": { "type": "string" }
+          }
+        }
+      },
+      "description": "Technical metadata (for moderation)"
+    },
+    "moderation": {
+      "type": "object",
+      "properties": {
+        "flags": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "reason": {
+                "type": "string",
+                "enum": ["spam", "harassment", "hate_speech", "misinformation", "off_topic", "inappropriate", "other"]
+              },
+              "reportedBy": { "type": "string" },
+              "reportedAt": { "type": "string", "format": "date-time" },
+              "details": { "type": "string" }
+            },
+            "required": ["reason", "reportedAt"]
+          }
+        },
+        "flagCount": { "type": "integer", "minimum": 0, "default": 0 },
+        "spamScore": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Automated spam detection score"
+        },
+        "toxicityScore": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Automated toxicity detection score"
+        },
+        "moderatorNotes": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "note": { "type": "string" },
+              "moderatorId": { "type": "string" },
+              "createdAt": { "type": "string", "format": "date-time" }
+            }
+          }
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "action": {
+                "type": "string",
+                "enum": ["approved", "rejected", "deleted", "restored", "edited", "warned"]
+              },
+              "moderatorId": { "type": "string" },
+              "timestamp": { "type": "string", "format": "date-time" },
+              "reason": { "type": "string" }
+            },
+            "required": ["action", "timestamp"]
+          }
+        }
+      }
+    },
+    "sentiment": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "description": "Sentiment score (-1 = negative, 1 = positive)"
+        },
+        "label": {
+          "type": "string",
+          "enum": ["positive", "neutral", "negative", "mixed"]
+        }
+      },
+      "description": "Sentiment analysis results"
+    },
+    "notifications": {
+      "type": "object",
+      "properties": {
+        "notifyOnReply": { "type": "boolean", "default": true },
+        "emailSent": { "type": "boolean", "default": false },
+        "emailSentAt": { "type": "string", "format": "date-time" }
+      }
+    }
+  },
+  "$defs": {
+    "registeredAuthor": {
+      "type": "object",
+      "required": ["id", "displayName", "isRegistered"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "uuid",
+          "description": "User account ID"
+        },
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100
+        },
+        "username": {
+          "type": "string"
+        },
+        "avatar": {
+          "type": "string",
+          "format": "uri"
+        },
+        "profileUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "isRegistered": {
+          "type": "boolean",
+          "const": true
+        },
+        "isVerified": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether the user is verified"
+        },
+        "isModerator": {
+          "type": "boolean",
+          "default": false
+        },
+        "isAdmin": {
+          "type": "boolean",
+          "default": false
+        },
+        "badges": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": { "type": "string" },
+              "label": { "type": "string" },
+              "icon": { "type": "string" }
+            }
+          }
+        },
+        "reputation": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "anonymousAuthor": {
+      "type": "object",
+      "required": ["displayName", "isRegistered"],
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 100,
+          "default": "Anonymous"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Optional email for notifications"
+        },
+        "website": {
+          "type": "string",
+          "format": "uri"
+        },
+        "isRegistered": {
+          "type": "boolean",
+          "const": false
+        },
+        "gravatarHash": {
+          "type": "string",
+          "description": "MD5 hash of email for Gravatar"
+        }
+      }
+    }
+  }
+}

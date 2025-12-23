@@ -1,0 +1,191 @@
+{
+  "id": "550e8400-e29b-41d4-a716-446655440000",
+  "title": "How to Write a Blog Post That Engages Your Readers",
+  "slug": "how-to-write-a-blog-post",
+  "subtitle": "A comprehensive guide to creating compelling content",
+  "description": "Learn the essential techniques for writing blog posts that captivate your audience and drive engagement.",
+  "excerpt": "In this blog post, we'll go over the basics of writing a great blog post. We'll cover how to come up with ideas, how to structure your post, and how to make it engaging for your readers.",
+  "content": "# Introduction\n\nWriting a great blog post is both an art and a science. In this comprehensive guide, we'll explore the key elements that make content truly engaging.\n\n## Coming Up With Ideas\n\nThe first step to writing a great blog post is having something worth saying. Here are some strategies:\n\n- **Listen to your audience** - What questions do they ask?\n- **Follow industry trends** - What's happening in your space?\n- **Share your experiences** - Personal stories resonate\n\n## Structuring Your Post\n\nA well-structured post keeps readers engaged from start to finish:\n\n1. Start with a compelling hook\n2. Break content into scannable sections\n3. Use headers, lists, and short paragraphs\n4. End with a clear call to action\n\n## Making It Engaging\n\nEngagement comes from connecting with your reader:\n\n- Write in a conversational tone\n- Use examples and analogies\n- Include visuals where appropriate\n- Ask questions to spark thought\n\n## Conclusion\n\nBy following these tips, you'll have all the tools you need to write blog posts that your readers will love!",
+  "contentFormat": "markdown",
+  "author": {
+    "id": "author-001",
+    "name": "John Doe",
+    "email": "johndoe@example.com",
+    "avatar": "https://example.com/avatars/johndoe.jpg",
+    "bio": "Content strategist and blogger with 10+ years of experience helping brands tell their stories.",
+    "website": "https://johndoe.com",
+    "social": {
+      "twitter": "johndoe",
+      "github": "johndoe",
+      "linkedin": "johndoe"
+    }
+  },
+  "coAuthors": [],
+  "featuredImage": {
+    "url": "https://example.com/images/blog-writing-hero.jpg",
+    "alt": "Person typing on laptop with coffee cup nearby",
+    "caption": "Writing great content starts with the right mindset",
+    "credit": "Photo by Jane Photographer",
+    "width": 1920,
+    "height": 1080,
+    "blurhash": "LEHV6nWB2yk8pyo0adR*.7kCMdnj",
+    "thumbnails": {
+      "small": "https://example.com/images/blog-writing-hero-sm.jpg",
+      "medium": "https://example.com/images/blog-writing-hero-md.jpg"
+    }
+  },
+  "images": [],
+  "categories": ["Content Creation", "Blogging"],
+  "tags": ["blogging", "writing", "content creation", "engagement", "seo"],
+  "series": {
+    "name": "Content Creation Masterclass",
+    "part": 1,
+    "totalParts": 5
+  },
+  "status": "published",
+  "visibility": "public",
+  "createdAt": "2022-02-08T09:00:00Z",
+  "updatedAt": "2022-02-15T14:30:00Z",
+  "publishedAt": "2022-02-08T12:00:00Z",
+  "scheduledAt": null,
+  "readingTime": {
+    "minutes": 5,
+    "words": 1000
+  },
+  "seo": {
+    "metaTitle": "How to Write a Blog Post | Complete Guide 2024",
+    "metaDescription": "Master the art of blog writing with our step-by-step guide. Learn to create engaging content that readers love.",
+    "canonicalUrl": "https://example.com/blog/how-to-write-a-blog-post",
+    "focusKeyword": "how to write a blog post",
+    "noIndex": false,
+    "noFollow": false,
+    "structuredData": {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "How to Write a Blog Post That Engages Your Readers"
+    }
+  },
+  "openGraph": {
+    "title": "How to Write a Blog Post That Engages Your Readers",
+    "description": "Learn the essential techniques for writing blog posts that captivate your audience.",
+    "image": "https://example.com/images/blog-writing-og.jpg",
+    "type": "article"
+  },
+  "twitter": {
+    "card": "summary_large_image",
+    "title": "How to Write a Blog Post That Engages Your Readers",
+    "description": "Learn the essential techniques for writing blog posts that captivate your audience.",
+    "image": "https://example.com/images/blog-writing-twitter.jpg"
+  },
+  "comments": [],
+  "commentSettings": {
+    "enabled": true,
+    "moderation": "auto",
+    "allowAnonymous": false,
+    "requireApproval": false,
+    "closeAfterDays": 90,
+    "maxDepth": 3
+  },
+  "reactions": {
+    "enabled": true,
+    "counts": {
+      "like": 42,
+      "love": 12,
+      "clap": 8
+    }
+  },
+  "stats": {
+    "views": 1547,
+    "uniqueViews": 1203,
+    "likes": 42,
+    "shares": 23,
+    "bookmarks": 15,
+    "commentCount": 2
+  },
+  "relatedPosts": [
+    "550e8400-e29b-41d4-a716-446655440001",
+    "550e8400-e29b-41d4-a716-446655440002"
+  ],
+  "previousPost": null,
+  "nextPost": "550e8400-e29b-41d4-a716-446655440001",
+  "attachments": [
+    {
+      "url": "https://example.com/downloads/blog-post-checklist.pdf",
+      "filename": "blog-post-checklist.pdf",
+      "mimeType": "application/pdf",
+      "size": 245000,
+      "description": "Downloadable checklist for writing great blog posts"
+    }
+  ],
+  "embeds": [
+    {
+      "type": "youtube",
+      "url": "https://youtube.com/watch?v=dQw4w9WgXcQ",
+      "caption": "Video tutorial on blog writing techniques"
+    }
+  ],
+  "codeBlocks": [],
+  "tableOfContents": {
+    "enabled": true,
+    "items": [
+      {
+        "id": "introduction",
+        "text": "Introduction",
+        "level": 1,
+        "children": []
+      },
+      {
+        "id": "coming-up-with-ideas",
+        "text": "Coming Up With Ideas",
+        "level": 2,
+        "children": []
+      },
+      {
+        "id": "structuring-your-post",
+        "text": "Structuring Your Post",
+        "level": 2,
+        "children": []
+      },
+      {
+        "id": "making-it-engaging",
+        "text": "Making It Engaging",
+        "level": 2,
+        "children": []
+      },
+      {
+        "id": "conclusion",
+        "text": "Conclusion",
+        "level": 2,
+        "children": []
+      }
+    ]
+  },
+  "locale": "en-US",
+  "translations": {},
+  "featured": true,
+  "featuredOrder": 1,
+  "sponsorship": {
+    "isSponsored": false,
+    "sponsor": null,
+    "disclosureText": null
+  },
+  "revision": 2,
+  "revisionHistory": [
+    {
+      "revision": 1,
+      "changedAt": "2022-02-08T09:00:00Z",
+      "changedBy": "author-001",
+      "changeNote": "Initial draft"
+    },
+    {
+      "revision": 2,
+      "changedAt": "2022-02-15T14:30:00Z",
+      "changedBy": "author-001",
+      "changeNote": "Added video embed and downloadable checklist"
+    }
+  ],
+  "customFields": {
+    "difficulty": "beginner",
+    "estimatedCompletionTime": "30 minutes"
+  }
+}

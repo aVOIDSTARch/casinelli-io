@@ -1,0 +1,455 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://casinelli.io/schemas/blog-post.schema.json",
+  "title": "BlogPost",
+  "description": "Schema for a comprehensive blog post with support for rich content, metadata, and interactions",
+  "type": "object",
+  "required": ["id", "title", "slug", "content", "author", "createdAt", "status"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for the blog post"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 4,
+      "maxLength": 200,
+      "description": "The title of the blog post"
+    },
+    "slug": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$",
+      "description": "URL-friendly identifier for the post"
+    },
+    "subtitle": {
+      "type": "string",
+      "maxLength": 300,
+      "description": "Optional subtitle or tagline"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Brief summary for SEO and previews"
+    },
+    "excerpt": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Longer excerpt for article previews"
+    },
+    "content": {
+      "type": "string",
+      "description": "Main content body (HTML or Markdown)"
+    },
+    "contentFormat": {
+      "type": "string",
+      "enum": ["html", "markdown", "mdx", "plaintext"],
+      "default": "markdown",
+      "description": "Format of the content field"
+    },
+    "author": {
+      "$ref": "#/$defs/author"
+    },
+    "coAuthors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/author"
+      },
+      "description": "Additional contributors to the post"
+    },
+    "featuredImage": {
+      "$ref": "#/$defs/image"
+    },
+    "images": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/image"
+      },
+      "description": "Gallery of images used in the post"
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true,
+      "description": "Primary categorization"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 50
+      },
+      "uniqueItems": true,
+      "description": "Keywords and topics"
+    },
+    "series": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "part": { "type": "integer", "minimum": 1 },
+        "totalParts": { "type": "integer", "minimum": 1 }
+      },
+      "description": "If post is part of a series"
+    },
+    "status": {
+      "type": "string",
+      "enum": ["draft", "pending_review", "scheduled", "published", "archived", "deleted"],
+      "description": "Publication status"
+    },
+    "visibility": {
+      "type": "string",
+      "enum": ["public", "private", "password_protected", "members_only", "paid"],
+      "default": "public",
+      "description": "Who can view this post"
+    },
+    "password": {
+      "type": "string",
+      "description": "Password if visibility is password_protected"
+    },
+    "createdAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the post was created"
+    },
+    "updatedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the post was last modified"
+    },
+    "publishedAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "When the post was/will be published"
+    },
+    "scheduledAt": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Scheduled publication time"
+    },
+    "readingTime": {
+      "type": "object",
+      "properties": {
+        "minutes": { "type": "integer", "minimum": 1 },
+        "words": { "type": "integer", "minimum": 0 }
+      },
+      "description": "Estimated reading time"
+    },
+    "seo": {
+      "type": "object",
+      "properties": {
+        "metaTitle": {
+          "type": "string",
+          "maxLength": 60
+        },
+        "metaDescription": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "canonicalUrl": {
+          "type": "string",
+          "format": "uri"
+        },
+        "focusKeyword": {
+          "type": "string"
+        },
+        "noIndex": {
+          "type": "boolean",
+          "default": false
+        },
+        "noFollow": {
+          "type": "boolean",
+          "default": false
+        },
+        "structuredData": {
+          "type": "object",
+          "description": "JSON-LD structured data"
+        }
+      },
+      "description": "SEO metadata"
+    },
+    "openGraph": {
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "image": { "type": "string", "format": "uri" },
+        "type": {
+          "type": "string",
+          "enum": ["article", "website", "blog"],
+          "default": "article"
+        }
+      },
+      "description": "Open Graph metadata for social sharing"
+    },
+    "twitter": {
+      "type": "object",
+      "properties": {
+        "card": {
+          "type": "string",
+          "enum": ["summary", "summary_large_image", "player"],
+          "default": "summary_large_image"
+        },
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "image": { "type": "string", "format": "uri" }
+      },
+      "description": "Twitter card metadata"
+    },
+    "comments": {
+      "type": "array",
+      "items": {
+        "$ref": "comment.schema.json"
+      },
+      "description": "Comments on this post"
+    },
+    "commentSettings": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": true
+        },
+        "moderation": {
+          "type": "string",
+          "enum": ["none", "manual", "auto"],
+          "default": "auto"
+        },
+        "allowAnonymous": {
+          "type": "boolean",
+          "default": false
+        },
+        "requireApproval": {
+          "type": "boolean",
+          "default": false
+        },
+        "closeAfterDays": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Auto-close comments after N days (0 = never)"
+        },
+        "maxDepth": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 10,
+          "default": 3,
+          "description": "Maximum nesting depth for replies"
+        }
+      }
+    },
+    "reactions": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean", "default": true },
+        "counts": {
+          "type": "object",
+          "additionalProperties": { "type": "integer" },
+          "description": "Reaction type to count mapping"
+        }
+      }
+    },
+    "stats": {
+      "type": "object",
+      "properties": {
+        "views": { "type": "integer", "minimum": 0, "default": 0 },
+        "uniqueViews": { "type": "integer", "minimum": 0, "default": 0 },
+        "likes": { "type": "integer", "minimum": 0, "default": 0 },
+        "shares": { "type": "integer", "minimum": 0, "default": 0 },
+        "bookmarks": { "type": "integer", "minimum": 0, "default": 0 },
+        "commentCount": { "type": "integer", "minimum": 0, "default": 0 }
+      },
+      "description": "Engagement statistics"
+    },
+    "relatedPosts": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "description": "IDs of related posts"
+    },
+    "previousPost": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the previous post in sequence"
+    },
+    "nextPost": {
+      "type": "string",
+      "format": "uuid",
+      "description": "ID of the next post in sequence"
+    },
+    "attachments": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/attachment"
+      },
+      "description": "Downloadable files"
+    },
+    "embeds": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "enum": ["youtube", "vimeo", "twitter", "codepen", "codesandbox", "gist", "spotify", "soundcloud", "custom"]
+          },
+          "url": { "type": "string", "format": "uri" },
+          "embedCode": { "type": "string" },
+          "caption": { "type": "string" }
+        },
+        "required": ["type", "url"]
+      },
+      "description": "Embedded media from external services"
+    },
+    "codeBlocks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "language": { "type": "string" },
+          "code": { "type": "string" },
+          "filename": { "type": "string" },
+          "highlightLines": {
+            "type": "array",
+            "items": { "type": "integer" }
+          },
+          "showLineNumbers": { "type": "boolean", "default": true }
+        },
+        "required": ["code"]
+      },
+      "description": "Code snippets with syntax highlighting info"
+    },
+    "tableOfContents": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean", "default": true },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/tocItem"
+          }
+        }
+      }
+    },
+    "locale": {
+      "type": "string",
+      "pattern": "^[a-z]{2}(-[A-Z]{2})?$",
+      "default": "en",
+      "description": "Language/locale code (e.g., en, en-US, fr)"
+    },
+    "translations": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "format": "uuid"
+      },
+      "description": "Locale code to post ID mapping for translations"
+    },
+    "featured": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether this is a featured/pinned post"
+    },
+    "featuredOrder": {
+      "type": "integer",
+      "description": "Sort order among featured posts"
+    },
+    "sponsorship": {
+      "type": "object",
+      "properties": {
+        "isSponsored": { "type": "boolean", "default": false },
+        "sponsor": { "type": "string" },
+        "disclosureText": { "type": "string" }
+      }
+    },
+    "revision": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 1,
+      "description": "Version number of this post"
+    },
+    "revisionHistory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "revision": { "type": "integer" },
+          "changedAt": { "type": "string", "format": "date-time" },
+          "changedBy": { "type": "string" },
+          "changeNote": { "type": "string" }
+        }
+      }
+    },
+    "customFields": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Extensible custom metadata"
+    }
+  },
+  "$defs": {
+    "author": {
+      "type": "object",
+      "required": ["id", "name"],
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "avatar": { "type": "string", "format": "uri" },
+        "bio": { "type": "string" },
+        "website": { "type": "string", "format": "uri" },
+        "social": {
+          "type": "object",
+          "properties": {
+            "twitter": { "type": "string" },
+            "github": { "type": "string" },
+            "linkedin": { "type": "string" },
+            "mastodon": { "type": "string" }
+          }
+        }
+      }
+    },
+    "image": {
+      "type": "object",
+      "required": ["url"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "alt": { "type": "string", "minLength": 1 },
+        "caption": { "type": "string" },
+        "credit": { "type": "string" },
+        "width": { "type": "integer", "minimum": 1 },
+        "height": { "type": "integer", "minimum": 1 },
+        "blurhash": { "type": "string" },
+        "thumbnails": {
+          "type": "object",
+          "additionalProperties": { "type": "string", "format": "uri" }
+        }
+      }
+    },
+    "attachment": {
+      "type": "object",
+      "required": ["url", "filename"],
+      "properties": {
+        "url": { "type": "string", "format": "uri" },
+        "filename": { "type": "string" },
+        "mimeType": { "type": "string" },
+        "size": { "type": "integer", "description": "File size in bytes" },
+        "description": { "type": "string" }
+      }
+    },
+    "tocItem": {
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "text": { "type": "string" },
+        "level": { "type": "integer", "minimum": 1, "maximum": 6 },
+        "children": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/tocItem" }
+        }
+      },
+      "required": ["id", "text", "level"]
+    }
+  }
+}

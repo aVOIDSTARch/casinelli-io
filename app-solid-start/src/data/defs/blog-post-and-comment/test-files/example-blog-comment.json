@@ -1,0 +1,179 @@
+{
+  "id": "660e8400-e29b-41d4-a716-446655440001",
+  "postId": "550e8400-e29b-41d4-a716-446655440000",
+  "parentId": null,
+  "rootId": null,
+  "depth": 0,
+  "author": {
+    "id": "user-002",
+    "displayName": "Jane Smith",
+    "username": "janesmith",
+    "avatar": "https://example.com/avatars/janesmith.jpg",
+    "profileUrl": "https://example.com/users/janesmith",
+    "isRegistered": true,
+    "isVerified": false,
+    "isModerator": false,
+    "isAdmin": false,
+    "badges": [
+      {
+        "type": "early_adopter",
+        "label": "Early Adopter",
+        "icon": "rocket"
+      }
+    ],
+    "reputation": 150
+  },
+  "content": "Great post! I've been struggling with coming up with ideas for my blog, but your tips were really helpful. The section on listening to your audience was exactly what I needed to hear. Thanks for sharing!",
+  "contentFormat": "plaintext",
+  "contentHtml": "<p>Great post! I've been struggling with coming up with ideas for my blog, but your tips were really helpful. The section on listening to your audience was exactly what I needed to hear. Thanks for sharing!</p>",
+  "status": "approved",
+  "createdAt": "2022-02-10T15:30:00Z",
+  "updatedAt": null,
+  "approvedAt": "2022-02-10T15:31:00Z",
+  "approvedBy": "mod-001",
+  "isEdited": false,
+  "editHistory": [],
+  "isPinned": false,
+  "isAuthorReply": false,
+  "isHighlighted": false,
+  "reactions": {
+    "likes": 5,
+    "dislikes": 0,
+    "hearts": 2,
+    "laughs": 0
+  },
+  "userReactions": [
+    {
+      "userId": "author-001",
+      "type": "like",
+      "createdAt": "2022-02-10T16:00:00Z"
+    },
+    {
+      "userId": "user-003",
+      "type": "heart",
+      "createdAt": "2022-02-10T18:30:00Z"
+    }
+  ],
+  "replyCount": 1,
+  "replies": [
+    {
+      "id": "660e8400-e29b-41d4-a716-446655440002",
+      "postId": "550e8400-e29b-41d4-a716-446655440000",
+      "parentId": "660e8400-e29b-41d4-a716-446655440001",
+      "rootId": "660e8400-e29b-41d4-a716-446655440001",
+      "depth": 1,
+      "author": {
+        "id": "author-001",
+        "displayName": "John Doe",
+        "username": "johndoe",
+        "avatar": "https://example.com/avatars/johndoe.jpg",
+        "profileUrl": "https://example.com/users/johndoe",
+        "isRegistered": true,
+        "isVerified": true,
+        "isModerator": false,
+        "isAdmin": false,
+        "badges": [
+          {
+            "type": "author",
+            "label": "Author",
+            "icon": "pen"
+          },
+          {
+            "type": "verified",
+            "label": "Verified",
+            "icon": "check"
+          }
+        ],
+        "reputation": 2500
+      },
+      "content": "Thanks so much, @janesmith! I'm glad the tips on audience listening resonated with you. Feel free to reach out if you have any questions as you apply these techniques to your own blog!",
+      "contentFormat": "plaintext",
+      "contentHtml": "<p>Thanks so much, <a href=\"/users/janesmith\">@janesmith</a>! I'm glad the tips on audience listening resonated with you. Feel free to reach out if you have any questions as you apply these techniques to your own blog!</p>",
+      "status": "approved",
+      "createdAt": "2022-02-10T17:15:00Z",
+      "updatedAt": null,
+      "approvedAt": "2022-02-10T17:15:00Z",
+      "approvedBy": null,
+      "isEdited": false,
+      "editHistory": [],
+      "isPinned": false,
+      "isAuthorReply": true,
+      "isHighlighted": true,
+      "reactions": {
+        "likes": 3,
+        "dislikes": 0,
+        "hearts": 1,
+        "laughs": 0
+      },
+      "userReactions": [],
+      "replyCount": 0,
+      "replies": [],
+      "mentions": [
+        {
+          "userId": "user-002",
+          "username": "janesmith",
+          "startIndex": 16,
+          "endIndex": 26
+        }
+      ],
+      "attachments": [],
+      "metadata": {
+        "userAgent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)",
+        "referrer": "https://example.com/blog/how-to-write-a-blog-post"
+      },
+      "moderation": {
+        "flags": [],
+        "flagCount": 0,
+        "spamScore": 0.01,
+        "toxicityScore": 0.02,
+        "moderatorNotes": [],
+        "actions": []
+      },
+      "sentiment": {
+        "score": 0.85,
+        "label": "positive"
+      },
+      "notifications": {
+        "notifyOnReply": true,
+        "emailSent": true,
+        "emailSentAt": "2022-02-10T17:16:00Z"
+      }
+    }
+  ],
+  "mentions": [],
+  "attachments": [],
+  "metadata": {
+    "ipAddress": "192.168.1.100",
+    "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+    "referrer": "https://example.com/blog/how-to-write-a-blog-post",
+    "geoLocation": {
+      "country": "United States",
+      "region": "California",
+      "city": "San Francisco"
+    }
+  },
+  "moderation": {
+    "flags": [],
+    "flagCount": 0,
+    "spamScore": 0.02,
+    "toxicityScore": 0.01,
+    "moderatorNotes": [],
+    "actions": [
+      {
+        "action": "approved",
+        "moderatorId": "mod-001",
+        "timestamp": "2022-02-10T15:31:00Z",
+        "reason": "Auto-approved - low spam score"
+      }
+    ]
+  },
+  "sentiment": {
+    "score": 0.92,
+    "label": "positive"
+  },
+  "notifications": {
+    "notifyOnReply": true,
+    "emailSent": true,
+    "emailSentAt": "2022-02-10T17:16:00Z"
+  }
+}
