@@ -1,4 +1,4 @@
-import { render, Dynamic } from "solid-js/web";
+/* import { render, Dynamic } from "solid-js/web";
 import {
   createSignal,
   createEffect,
@@ -193,7 +193,7 @@ function Counter() {
   >foo</button>
 
   // To change className property conditionally use this syntax
-  import "./style.css";
+  // import "./style.css";
 
   function App() {
     const [current, setCurrent] = createSignal("foo");
@@ -228,7 +228,7 @@ function Counter() {
     }
 
     // Directive
-    import { onCleanup } from "solid-js";
+    // import { onCleanup } from "solid-js";
 
     export default function clickOutside(el, accessor) {
       const onClick = (e) => !el.contains(e.target) && accessor()?.();
@@ -238,9 +238,9 @@ function Counter() {
     }
 
     // Using a custom directive
-    import { createSignal, Show } from "solid-js";
-    import clickOutside from "./click-outside";
-    import "./style.css";
+   // import { createSignal, Show } from "solid-js";
+   // import clickOutside from "./click-outside";
+   // import "./style.css";
 
     function App() {
       const [show, setShow] = createSignal(false);
@@ -272,7 +272,7 @@ function Counter() {
     }
 
     // To split off some props to pass down the tree to child components use splitProps like this
-    export default function Greeting(props) {
+   // export default function Greeting(props) {
       const [local, others] = splitProps(props, ["greeting", "name"]);
       return <h3 {...others}>{local.greeting} {local.name}</h3>
     }
@@ -290,4 +290,4 @@ function Counter() {
   }
 
   render(() => <Counter />, document.getElementById("app"))
-}
+ */
