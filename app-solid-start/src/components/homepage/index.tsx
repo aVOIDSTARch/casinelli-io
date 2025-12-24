@@ -3,16 +3,26 @@
 import { type Component } from "solid-js";
 import HomeHeader from "./HomeHeader";
 import HomeTitle from "./HomeTitle";
+import { TitleProps } from './HomeTitle';
+import { HomeHeaderProps } from "./HomeHeader";
+import PageProperties from "~/types/PageProperties";
 
-const titleText = "casinelli.io";
-const styleClasses = {};
 
-const HomePage: Component = () => {
+
+interface HomePageProps {
+  pageProps: PageProperties;
+  mainDivStylesKV: { [k: string]: boolean };
+  headerProps: HomeHeaderProps;
+  titleProps: TitleProps;
+}
+
+const HomePage: Component<HomePageProps> = (props) => {
   return (
-    <>
-      <HomeHeader />
-      <HomeTitle title={titleText} />
-    </>
+    <div classList={ props.mainDivStylesKV }>
+        <HomeHeader text={ props.headerProps.text} stylesKV={props.headerProps.stylesKV}/>
+        <HomeTitle title={props.titleProps.title} stylesKV={props.titleProps.stylesKV} />
+        <CardNavSection />>
+    </div>
   );
 };
 

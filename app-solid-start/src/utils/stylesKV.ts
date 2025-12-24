@@ -15,6 +15,8 @@
  * // Returns: { disabled: false, hidden: false }
  */
 
+export type StylesKV = { [k: string]: boolean };
+
 export default function createStylesKV(
     classNames: string[],
     value: boolean
@@ -24,6 +26,6 @@ export default function createStylesKV(
             acc[className] = value;
             return acc;
         },
-        {} as Record<string, boolean>
+        {} as StylesKV
     );
 }

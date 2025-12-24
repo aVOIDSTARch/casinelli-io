@@ -1,6 +1,6 @@
 import { type Component } from "solid-js";
 
-interface HomeHeaderProps {
+export interface HomeHeaderProps {
   text?: string;
   stylesKV?: { [k: string]: boolean };
 }

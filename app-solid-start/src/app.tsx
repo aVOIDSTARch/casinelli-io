@@ -6,16 +6,21 @@ import { Suspense } from "solid-js";
 import { supabase } from "~/utils/supabase";
 import { createResource, For } from "solid-js";
 //Components
-import Nav from "~/components/examples/Nav";
+import HomePage from "./components/homepage";
 //Styling
 import "./app.css";
 
+
 export default function App() {
+
+  
+
+
   return (
     <Router
       root={props => (
         <>
-          <Nav />
+          <HomePage  />
           <Suspense>{props.children}</Suspense>
         </>
       )}
