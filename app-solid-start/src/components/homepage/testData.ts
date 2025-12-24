@@ -27,7 +27,7 @@ export const testMainDivStylesKV: StylesKV = { homepage: true };
 
 // Header props
 export const testHeaderProps: HomeHeaderProps = {
-  text: 'Casinelli.io',
+  text: '',
   stylesKV: { 'home-header': true },
 };
 

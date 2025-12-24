@@ -3,13 +3,15 @@
 /* Main page container */
 .homepage {
   @apply min-h-screen flex flex-col;
+  background-color: #fff;
 }
 
 /* Header - fills remaining space above other sections */
 .home-header {
   @apply flex-1 w-full px-6;
   @apply flex items-center justify-center;
-  @apply text-4xl md:text-6xl font-bold text-gray-900 dark:text-white;
+  @apply text-4xl md:text-6xl font-bold;
+  color: #222;
 }
 
 /* Title - 1/8 of viewport, text right-aligned, vertically centered */
@@ -21,9 +23,10 @@
   font-size: 5rem;
   line-height: 1.2;
   letter-spacing: -0.1rem;
+  font-weight: 300;
+  color: #222;
+  border-bottom: 1px solid #E1E1E1;
   @apply w-full flex items-center justify-end;
-  @apply font-light text-gray-800 dark:text-gray-200;
-  @apply border-b border-gray-200 dark:border-gray-800;
 }
 
 @media (min-width: 768px) {
@@ -41,13 +44,16 @@
 /* Apps Navigation Section - 1/4 of viewport */
 .apps-nav-section {
   height: 25vh;
+  background-color: #fff;
+  border-bottom: 1px solid #E1E1E1;
   @apply w-full py-4 px-4 md:px-8;
   @apply flex flex-col justify-center;
-  @apply bg-gray-50 dark:bg-gray-900;
 }
 
 .apps-nav-section h2 {
-  @apply text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4 text-center;
+  font-weight: 600;
+  color: #222;
+  @apply text-xl mb-4 text-center;
 }
 
 /* Nav Card Section (grid container) */
@@ -58,36 +64,53 @@
 
 /* Individual Nav Card */
 .nav-card {
+  background-color: #fff;
+  border: 1px solid #E1E1E1;
+  border-radius: 4px;
   @apply flex flex-col items-center p-4;
-  @apply bg-white dark:bg-gray-800;
-  @apply rounded-lg shadow-md;
-  @apply border border-gray-200 dark:border-gray-700;
-  @apply transition-all duration-200;
-  @apply hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-600;
 }
 
-/* Nav Card Link/Button */
+.nav-card:hover {
+  border-color: #bbb;
+}
+
+/* Nav Card Link/Button - Skeleton style */
 .nav-card-link {
-  @apply inline-block px-6 py-3 mb-2;
-  @apply bg-blue-600 hover:bg-blue-700;
-  @apply text-white font-medium;
-  @apply rounded-md;
-  @apply transition-colors duration-200;
-  @apply no-underline;
+  display: inline-block;
+  height: 38px;
+  padding: 0 30px;
+  color: #555;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 38px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  text-decoration: none;
+  background-color: transparent;
+  border-radius: 4px;
+  border: 1px solid #bbb;
+  @apply mb-2;
+}
+
+.nav-card-link:hover {
+  color: #333;
+  border-color: #888;
 }
 
 /* Nav Card Paragraph */
 .nav-card-para {
-  @apply text-sm text-gray-600 dark:text-gray-400 text-center;
+  color: #555;
+  @apply text-sm text-center;
 }
 
 /* Footer - 1/4 of viewport */
 .home-footer {
   height: 25vh;
+  background-color: #fff;
+  border-top: 1px solid #E1E1E1;
   @apply w-full py-4 px-4;
   @apply flex flex-col justify-center;
-  @apply bg-gray-100 dark:bg-gray-950;
-  @apply border-t border-gray-200 dark:border-gray-800;
 }
 
 .home-footer .nav-card-section {
@@ -95,12 +118,11 @@
 }
 
 .home-footer .nav-card {
-  @apply p-3 shadow-sm;
+  @apply p-3;
 }
 
 .home-footer .nav-card-link {
-  @apply px-4 py-2 text-sm;
-  @apply bg-gray-600 hover:bg-gray-700;
+  padding: 0 20px;
 }
 
 /* Mobile adjustments - stack cards vertically */
