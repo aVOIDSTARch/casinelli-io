@@ -1,17 +1,14 @@
 import type { HomeHeaderProps } from './HomeHeader';
-import type { TitleProps } from './HomeTitle';
+import type { HomeTitleProps } from './HomeTitle';
 import type { AppsNavSectionProps } from './AppsNavSection';
 import type { HomeFooterProps } from './HomeFooter';
 import type { PageProperties } from '~/types/PageProperties';
-import type { NavCardProps, NavCardStylesSet } from './NavCard';
-import type { StylesKV } from '~/utils/stylesKV';
+import type { NavCardProps } from './NavCard';
+import { getPageStyles,  PageName } from '~/styles/engine';
 
-// Shared styles for nav cards
-const defaultNavCardStylesSet: NavCardStylesSet = {
-  navCardStyles: { 'nav-card': true },
-  buttonStyles: { 'nav-card-link': true },
-  paraStyles: { 'nav-card-para': true },
-};
+// Get styles from the engine
+const styles = getPageStyles(PageName.HOMEPAGE);
+const navCardStylesSet = styles.sections.appsNav.navCardSection!.navCardStylesSet;
 
 // Page metadata
 export const testPageProps: PageProperties = {
@@ -22,51 +19,48 @@ export const testPageProps: PageProperties = {
   description: 'Welcome to Casinelli.io - Apps, Blog, and More',
 };
 
-// Main container styles
-export const testMainDivStylesKV: StylesKV = { homepage: true };
-
 // Header props
 export const testHeaderProps: HomeHeaderProps = {
   text: '',
-  stylesKV: { 'home-header': true },
+  stylesKV: styles.header,
 };
 
 // Title props
-export const testTitleProps: TitleProps = {
+export const testTitleProps: HomeTitleProps = {
   title: 'casinelli.io',
-  stylesKV: { 'home-title': true },
+  stylesKV: styles.title,
 };
 
-// App navigation cards
+// App navigation cards (content only, styles from engine)
 const appNavCards: NavCardProps[] = [
   {
     key: 0,
     buttonText: 'Color',
     paraText: 'Color utility tools',
     url: '/apps/color',
-    navCardStylesSet: defaultNavCardStylesSet,
+    navCardStylesSet,
   },
   {
     key: 1,
     buttonText: 'Jayson',
     paraText: 'JSON utility tools',
     url: '/apps/jayson',
-    navCardStylesSet: defaultNavCardStylesSet,
+    navCardStylesSet,
   },
   {
     key: 2,
     buttonText: 'Theme UI',
     paraText: 'Theme builder and previewer',
     url: '/apps/theme-ui',
-    navCardStylesSet: defaultNavCardStylesSet,
+    navCardStylesSet,
   },
 ];
 
 export const testAppsNavSectionProps: AppsNavSectionProps = {
   title: 'Apps',
-  stylesKV: { 'apps-nav-section': true },
+  stylesKV: styles.sections.appsNav.container,
   navCardSectionProps: {
-    navAreaStyles: { 'nav-card-section': true },
+    navAreaStyles: styles.sections.appsNav.navCardSection!.navAreaStyles,
     navCardPropsSet: appNavCards,
   },
 };
@@ -78,22 +72,22 @@ const footerNavCards: NavCardProps[] = [
     buttonText: 'Blog',
     paraText: 'Read the latest posts',
     url: '/blog',
-    navCardStylesSet: defaultNavCardStylesSet,
+    navCardStylesSet,
   },
   {
     key: 1,
     buttonText: 'Mission',
     paraText: 'Our purpose and goals',
     url: '/mission',
-    navCardStylesSet: defaultNavCardStylesSet,
+    navCardStylesSet,
   },
 ];
 
 export const testFooterProps: HomeFooterProps = {
   text: '',
-  stylesKV: { 'home-footer': true },
+  stylesKV: styles.footer,
   navCardSectionProps: {
-    navAreaStyles: { 'nav-card-section': true },
+    navAreaStyles: styles.sections.appsNav.navCardSection!.navAreaStyles,
     navCardPropsSet: footerNavCards,
   },
 };
@@ -101,7 +95,7 @@ export const testFooterProps: HomeFooterProps = {
 // Combined export for easy use
 export const testHomePageProps = {
   pageProps: testPageProps,
-  mainDivStylesKV: testMainDivStylesKV,
+  mainDivStylesKV: styles.page,
   headerProps: testHeaderProps,
   titleProps: testTitleProps,
   appsNavSectionProps: testAppsNavSectionProps,

@@ -2,16 +2,17 @@
 
 import { type Component, mergeProps } from 'solid-js';
 import HomeHeader, { HomeHeaderProps } from './HomeHeader';
-import HomeTitle, { TitleProps } from './HomeTitle';
+import HomeTitle, { HomeTitleProps } from './HomeTitle';
 import AppsNavSection, { AppsNavSectionProps } from './AppsNavSection';
 import HomeFooter, { HomeFooterProps } from './HomeFooter';
 import type { PageProperties } from '~/types/PageProperties';
+import { StylesKV } from '~/utils/stylesKV';
 
-interface HomePageProps {
+export interface HomePageProps {
   pageProps?: PageProperties;
-  mainDivStylesKV?: { [k: string]: boolean };
+  mainDivStylesKV?: StylesKV;
   headerProps?: HomeHeaderProps;
-  titleProps?: TitleProps;
+  titleProps?: HomeTitleProps;
   appsNavSectionProps?: AppsNavSectionProps;
   footerProps?: HomeFooterProps;
 }

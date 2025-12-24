@@ -1,6 +1,7 @@
 import { type Component, For } from 'solid-js';
 import NavCard, { NavCardProps, NavCardStylesSet } from './NavCard';
 import { StylesKV } from '~/utils/stylesKV';
+
 export interface NavCardSectionProps {
   navAreaStyles: StylesKV;
   navCardPropsSet: NavCardProps[];

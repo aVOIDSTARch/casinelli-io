@@ -1,3 +1,6 @@
 @import "tailwindcss";
 @import "~/styles/skeleton.css";
 @import "~/styles/homepage.css";
+@import "~/styles/apps.css";
+@import "~/styles/blog.css";
+@import "~/styles/mission.css";

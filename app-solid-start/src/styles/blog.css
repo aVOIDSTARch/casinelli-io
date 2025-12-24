@@ -1,0 +1,45 @@
+/* Blog Page Styles - Skeleton CSS Aesthetic */
+
+/* Main page container */
+.blog-page {
+  @apply min-h-screen flex flex-col;
+  background-color: #fff;
+}
+
+/* Header */
+.blog-header {
+  @apply flex-1 w-full px-6;
+  @apply flex items-center justify-center;
+  @apply text-4xl md:text-6xl font-bold;
+  color: #222;
+}
+
+/* Title */
+.blog-title {
+  height: 12.5vh;
+  padding-right: 100px;
+  font-family: 'Raleway', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 5rem;
+  line-height: 1.2;
+  letter-spacing: -0.1rem;
+  font-weight: 300;
+  color: #222;
+  border-bottom: 1px solid #E1E1E1;
+  @apply w-full flex items-center justify-end;
+}
+
+/* Main content section */
+.blog-content-section {
+  background-color: #fff;
+  border-bottom: 1px solid #E1E1E1;
+  @apply w-full py-4 px-4 md:px-8;
+  @apply flex flex-col justify-center;
+}
+
+/* Footer */
+.blog-footer {
+  background-color: #fff;
+  border-top: 1px solid #E1E1E1;
+  @apply w-full py-4 px-4;
+  @apply flex flex-col justify-center;
+}

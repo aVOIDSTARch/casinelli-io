@@ -1,6 +1,9 @@
-import HomePage from '~/components/homepage';
-import { testHomePageProps } from '~/components/homepage/testData';
+import HomePage from '~/components/homepage/homePageIndex';
+import generateHomePageProps from '~/components/homepage/HomePagePropsGen';
+
+// Use imported module function that creates
+const homePageProps = generateHomePageProps;
 
 export default function Home() {
-  return <HomePage {...testHomePageProps} />;
+  return <HomePage {...homePageProps} />;
 }
