@@ -1,0 +1,130 @@
+/* Homepage Component Styles */
+
+/* Main page container */
+.homepage {
+  @apply min-h-screen flex flex-col;
+}
+
+/* Header - fills remaining space above other sections */
+.home-header {
+  @apply flex-1 w-full px-6;
+  @apply flex items-center justify-center;
+  @apply text-4xl md:text-6xl font-bold text-gray-900 dark:text-white;
+}
+
+/* Title - 1/8 of viewport, text right-aligned, vertically centered */
+/* Skeleton-inspired typography: light weight, tight letter-spacing, large size */
+.home-title {
+  height: 12.5vh;
+  padding-right: 100px;
+  font-family: 'Raleway', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-size: 5rem;
+  line-height: 1.2;
+  letter-spacing: -0.1rem;
+  @apply w-full flex items-center justify-end;
+  @apply font-light text-gray-800 dark:text-gray-200;
+  @apply border-b border-gray-200 dark:border-gray-800;
+}
+
+@media (min-width: 768px) {
+  .home-title {
+    font-size: 7rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-title {
+    font-size: 9rem;
+  }
+}
+
+/* Apps Navigation Section - 1/4 of viewport */
+.apps-nav-section {
+  height: 25vh;
+  @apply w-full py-4 px-4 md:px-8;
+  @apply flex flex-col justify-center;
+  @apply bg-gray-50 dark:bg-gray-900;
+}
+
+.apps-nav-section h2 {
+  @apply text-xl font-semibold text-gray-800 dark:text-gray-200 mb-4 text-center;
+}
+
+/* Nav Card Section (grid container) */
+.nav-card-section {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto;
+  @apply h-full items-center;
+}
+
+/* Individual Nav Card */
+.nav-card {
+  @apply flex flex-col items-center p-4;
+  @apply bg-white dark:bg-gray-800;
+  @apply rounded-lg shadow-md;
+  @apply border border-gray-200 dark:border-gray-700;
+  @apply transition-all duration-200;
+  @apply hover:shadow-lg hover:border-gray-300 dark:hover:border-gray-600;
+}
+
+/* Nav Card Link/Button */
+.nav-card-link {
+  @apply inline-block px-6 py-3 mb-2;
+  @apply bg-blue-600 hover:bg-blue-700;
+  @apply text-white font-medium;
+  @apply rounded-md;
+  @apply transition-colors duration-200;
+  @apply no-underline;
+}
+
+/* Nav Card Paragraph */
+.nav-card-para {
+  @apply text-sm text-gray-600 dark:text-gray-400 text-center;
+}
+
+/* Footer - 1/4 of viewport */
+.home-footer {
+  height: 25vh;
+  @apply w-full py-4 px-4;
+  @apply flex flex-col justify-center;
+  @apply bg-gray-100 dark:bg-gray-950;
+  @apply border-t border-gray-200 dark:border-gray-800;
+}
+
+.home-footer .nav-card-section {
+  @apply grid-cols-1 sm:grid-cols-2 gap-4 max-w-2xl;
+}
+
+.home-footer .nav-card {
+  @apply p-3 shadow-sm;
+}
+
+.home-footer .nav-card-link {
+  @apply px-4 py-2 text-sm;
+  @apply bg-gray-600 hover:bg-gray-700;
+}
+
+/* Mobile adjustments - stack cards vertically */
+@media (max-width: 640px) {
+  .home-title {
+    font-size: 3rem;
+    @apply justify-center text-center;
+    padding-right: 0;
+    padding-left: 0;
+    @apply px-4;
+  }
+
+  .apps-nav-section,
+  .home-footer {
+    height: auto;
+    min-height: 25vh;
+    @apply py-6;
+  }
+
+  .nav-card-section {
+    @apply grid-cols-1 gap-3;
+  }
+
+  .nav-card {
+    @apply p-3;
+  }
+}

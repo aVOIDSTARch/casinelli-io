@@ -1,28 +1,15 @@
 // Routing
-import { Router } from "@solidjs/router";
-import { FileRoutes } from "@solidjs/start/router";
-import { Suspense } from "solid-js";
-//Database
-import { supabase } from "~/utils/supabase";
-import { createResource, For } from "solid-js";
-//Components
-import HomePage from "./components/homepage";
-//Styling
-import "./app.css";
-
+import { Router } from '@solidjs/router';
+import { FileRoutes } from '@solidjs/start/router';
+import { Suspense } from 'solid-js';
+// Styling
+import './app.css';
 
 export default function App() {
-
-  
-
-
   return (
     <Router
-      root={props => (
-        <>
-          <HomePage  />
-          <Suspense>{props.children}</Suspense>
-        </>
+      root={(props) => (
+        <Suspense>{props.children}</Suspense>
       )}
     >
       <FileRoutes />

@@ -1,17 +1,29 @@
-import { type Component } from "solid-js";
-import NavCard from "./NavCard";
-
+import { type Component, For } from 'solid-js';
+import NavCard, { NavCardProps, NavCardStylesSet } from './NavCard';
+import { StylesKV } from '~/utils/stylesKV';
 export interface NavCardSectionProps {
-  navCardData: Array<Object>;
-  sectionStyles: { [k: string]: boolean };
+  navAreaStyles: StylesKV;
+  navCardPropsSet: NavCardProps[];
 }
 
-const HomeHeader: Component<HomeHeaderProps> = (props) => {
+const NavCardSection: Component<NavCardSectionProps> = (props) => {
+  const data = () => props.navCardPropsSet;
+
   return (
-    <>
-      <header classList={props.stylesKV}>{props.text}</header>
-    </>
+    <nav classList={props.navAreaStyles}>
+      <For each={data()}>
+        {(propsSet, index) => (
+          <NavCard
+            key={index()}
+            paraText={propsSet.paraText}
+            buttonText={propsSet.buttonText}
+            url={propsSet.url}
+            navCardStylesSet={propsSet.navCardStylesSet}
+          />
+        )}
+      </For>
+    </nav>
   );
 };
 
-export default HomeHeader;
+export default NavCardSection;

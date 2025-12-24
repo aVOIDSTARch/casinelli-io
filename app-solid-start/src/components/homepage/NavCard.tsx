@@ -1,22 +1,31 @@
-import { Show, type Component, createSignal } from "solid-js";
-import { StylesKV } from "~/utils/stylesKV";
+import { Show, type Component, createMemo } from 'solid-js';
+import { A } from '@solidjs/router';
+import { StylesKV } from '~/utils/stylesKV';
+
+export interface NavCardStylesSet {
+  navCardStyles: StylesKV;
+  buttonStyles: StylesKV;
+  paraStyles: StylesKV;
+}
 
 export interface NavCardProps {
   paraText?: string;
-  paraStyles?: StylesKV;
   buttonText?: string;
-  buttonStyles?: StylesKV;
-  navCardStyles?: StylesKV;
+  url?: string;
+  key: number;
+  navCardStylesSet: NavCardStylesSet;
 }
 
-const [show, setShow] = createSignal(false);
-
 const NavCard: Component<NavCardProps> = (props) => {
+  const showPara = createMemo(() => Boolean(props.paraText));
+
   return (
-    <section classList={props.navCardStyles}>
-      <button classList={props.buttonStyles}>{props.buttonText}</button>
-      <Show when={show()}>
-        <p classList={props.paraStyles}>{props.paraText}</p>
+    <section classList={props.navCardStylesSet.navCardStyles}>
+      <A href={props.url || '#'} classList={props.navCardStylesSet.buttonStyles}>
+        {props.buttonText}
+      </A>
+      <Show when={showPara()}>
+        <p classList={props.navCardStylesSet.paraStyles}>{props.paraText}</p>
       </Show>
     </section>
   );
