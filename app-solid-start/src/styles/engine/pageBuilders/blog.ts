@@ -4,11 +4,12 @@
  */
 
 import type { PageStylesModule } from '../types';
-import { parseCSS } from '../cssParser';
+import { parseCSSMultiple } from '../cssParser';
 import { navCardDefaults, createStyleWithFallback } from '../defaults';
 
-// Import CSS as raw string (Vite feature)
+// Import CSS as raw strings (Vite feature)
 import blogCSS from '~/styles/blog.css?raw';
+import commonCSS from '~/styles/common.css?raw';
 
 // Default styles for blog page
 const blogDefaults: PageStylesModule = {
@@ -31,8 +32,9 @@ const blogDefaults: PageStylesModule = {
  * Build complete styles for the Blog page
  */
 export function buildBlogStyles(): PageStylesModule {
-  const parsed = parseCSS(blogCSS, 'blog');
-  const classes = parsed.classNames;
+  // Parse both page-specific and common CSS
+  const parsed = parseCSSMultiple([blogCSS, commonCSS], 'blog');
+  const classes: Set<string> = parsed.classNames;
 
   return {
     page: createStyleWithFallback(classes, 'blog-page', blogDefaults.page),

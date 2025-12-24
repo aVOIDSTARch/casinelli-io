@@ -4,11 +4,12 @@
  */
 
 import type { PageStylesModule } from '../types';
-import { parseCSS } from '../cssParser';
+import { parseCSSMultiple } from '../cssParser';
 import { navCardDefaults, createStyleWithFallback } from '../defaults';
 
-// Import CSS as raw string (Vite feature)
+// Import CSS as raw strings (Vite feature)
 import appsCSS from '~/styles/apps.css?raw';
+import commonCSS from '~/styles/common.css?raw';
 
 // Default styles for apps page
 const appsDefaults: PageStylesModule = {
@@ -31,8 +32,9 @@ const appsDefaults: PageStylesModule = {
  * Build complete styles for the Apps page
  */
 export function buildAppsStyles(): PageStylesModule {
-  const parsed = parseCSS(appsCSS, 'apps');
-  const classes = parsed.classNames;
+  // Parse both page-specific and common CSS
+  const parsed = parseCSSMultiple([appsCSS, commonCSS], 'apps');
+  const classes: Set<string> = parsed.classNames;
 
   return {
     page: createStyleWithFallback(classes, 'apps-page', appsDefaults.page),

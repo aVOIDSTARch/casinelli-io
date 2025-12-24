@@ -1,21 +1,23 @@
 /**
  * Homepage Style Builder
- * Parses homepage.css and returns complete PageStylesModule
+ * Parses homepage.css + common.css and returns complete PageStylesModule
  */
 
 import type { PageStylesModule } from '../types';
-import { parseCSS } from '../cssParser';
+import { parseCSSMultiple } from '../cssParser';
 import { homepageDefaults, navCardDefaults, createStyleWithFallback } from '../defaults';
 
-// Import CSS as raw string (Vite feature)
+// Import CSS as raw strings (Vite feature)
 import homepageCSS from '~/styles/homepage.css?raw';
+import commonCSS from '~/styles/common.css?raw';
 
 /**
  * Build complete styles for the Homepage
  * Returns ALL StylesKV collections needed for every component
  */
 export function buildHomepageStyles(): PageStylesModule {
-  const parsed = parseCSS(homepageCSS, 'homepage');
+  // Parse both page-specific and common CSS
+  const parsed = parseCSSMultiple([homepageCSS, commonCSS], 'homepage');
   const classes: Set<string> = parsed.classNames;
 
   return {

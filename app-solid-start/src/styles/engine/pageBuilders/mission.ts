@@ -4,11 +4,12 @@
  */
 
 import type { PageStylesModule } from '../types';
-import { parseCSS } from '../cssParser';
+import { parseCSSMultiple } from '../cssParser';
 import { navCardDefaults, createStyleWithFallback } from '../defaults';
 
-// Import CSS as raw string (Vite feature)
+// Import CSS as raw strings (Vite feature)
 import missionCSS from '~/styles/mission.css?raw';
+import commonCSS from '~/styles/common.css?raw';
 
 // Default styles for mission page
 const missionDefaults: PageStylesModule = {
@@ -31,8 +32,9 @@ const missionDefaults: PageStylesModule = {
  * Build complete styles for the Mission page
  */
 export function buildMissionStyles(): PageStylesModule {
-  const parsed = parseCSS(missionCSS, 'mission');
-  const classes = parsed.classNames;
+  // Parse both page-specific and common CSS
+  const parsed = parseCSSMultiple([missionCSS, commonCSS], 'mission');
+  const classes: Set<string> = parsed.classNames;
 
   return {
     page: createStyleWithFallback(classes, 'mission-page', missionDefaults.page),

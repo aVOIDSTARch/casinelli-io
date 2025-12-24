@@ -47,6 +47,42 @@ export function parseCSS(cssContent: string, cacheKey?: string): ParsedCSS {
 }
 
 /**
+ * Parse multiple CSS sources and combine their class names
+ * @param cssSources - Array of CSS content strings
+ * @param cacheKey - Optional cache key for the combined result
+ */
+export function parseCSSMultiple(
+  cssSources: string[],
+  cacheKey?: string
+): ParsedCSS {
+  // Check cache first
+  if (cacheKey && parseCache.has(cacheKey)) {
+    return parseCache.get(cacheKey)!;
+  }
+
+  const combinedClassNames = new Set<string>();
+  const combinedContent: string[] = [];
+
+  for (const cssContent of cssSources) {
+    const parsed = parseCSS(cssContent);
+    parsed.classNames.forEach((cls) => combinedClassNames.add(cls));
+    combinedContent.push(parsed.rawContent);
+  }
+
+  const result: ParsedCSS = {
+    classNames: combinedClassNames,
+    rawContent: combinedContent.join('\n'),
+  };
+
+  // Cache if key provided
+  if (cacheKey) {
+    parseCache.set(cacheKey, result);
+  }
+
+  return result;
+}
+
+/**
  * Check if a class name exists in parsed CSS
  */
 export function hasClass(parsed: ParsedCSS, className: string): boolean {
