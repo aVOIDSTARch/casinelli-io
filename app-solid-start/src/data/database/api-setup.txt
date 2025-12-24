@@ -1,0 +1,10 @@
+add permissions for the users on api
+
+Under these new settings, the anon and authenticated roles can execute functions defined in the api schema, but they have no automatic permissions on any tables. On a table-by-table basis, you can grant them permissions by running the following command:
+
+grant select on table api.<your_table> to anon;
+grant select, insert, update, delete on table api.<your_table> to authenticated;
+
+api: https://fssupeeohwydsruwgitr.supabase.co
+
+supabase gen types typescript--project - id fssupeeohwydsruwgitr > database.types.ts

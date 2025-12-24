@@ -1,5 +1,7 @@
 /* Apps Page Styles - Skeleton CSS Aesthetic */
 
+@import "tailwindcss";
+
 /* Main page container */
 .apps-page {
   @apply min-h-screen flex flex-col;
