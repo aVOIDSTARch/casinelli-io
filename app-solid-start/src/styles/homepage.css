@@ -27,18 +27,20 @@
   @apply flex-1 flex flex-col;
 }
 
-/* Header - fills remaining space above other sections */
+/* Header - size to content with 5% padding */
 .home-header {
-  @apply flex-1 w-full px-6;
+  padding: 5%;
+  @apply w-full;
   @apply flex items-center justify-center;
   @apply text-4xl md:text-6xl font-bold;
   color: #222;
+  flex-shrink: 0;
 }
 
-/* Title - 1/8 of viewport, text right-aligned, vertically centered */
+/* Title - takes remaining viewport space, text right-aligned, vertically centered */
 /* Skeleton-inspired typography: light weight, tight letter-spacing, large size */
 .home-title {
-  height: 12.5vh;
+  @apply flex-1 w-full flex items-center justify-end;
   padding-right: 100px;
   font-family: 'Raleway', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial,
     sans-serif;
@@ -48,7 +50,7 @@
   font-weight: 300;
   color: #222;
   border-bottom: 1px solid #e1e1e1;
-  @apply w-full flex items-center justify-end;
+  min-height: 150px;
 }
 
 @media (min-width: 768px) {
@@ -63,13 +65,14 @@
   }
 }
 
-/* Apps Navigation Section - 1/4 of viewport */
+/* Apps Navigation Section - size to content with 5% padding */
 .apps-nav-section {
-  height: 25vh;
+  padding: 5%;
   background-color: #fff;
   border-bottom: 1px solid #e1e1e1;
-  @apply w-full py-4 px-4 md:px-8;
+  @apply w-full;
   @apply flex flex-col justify-center;
+  flex-shrink: 0;
 }
 
 .apps-nav-section h2 {
@@ -80,7 +83,7 @@
 
 /* Nav Card Section (grid container) */
 .nav-card-section {
-  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mx-auto;
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-12 mx-auto;
   @apply h-full items-center;
   max-width: 100%;
 }
@@ -96,10 +99,19 @@
   padding: 0;
   position: relative;
   overflow: hidden;
+  /* Hover animation setup */
+  transition:
+    transform 0.2s ease-out,
+    box-shadow 0.2s ease-out,
+    border-color 0.2s ease-out;
 }
 
 .nav-card:hover {
   border-color: #bbb;
+  transform: translateY(-4px);
+  box-shadow:
+    0 4px 12px rgba(0, 0, 0, 0.08),
+    0 2px 4px rgba(0, 0, 0, 0.04);
 }
 
 /* Accent color strip at top - 5px height */
@@ -118,11 +130,20 @@
   width: 100%;
 }
 
-/* Nav Card Image - square, 80% width */
+/* Nav Card Image - square, 80% width, 2px border */
 .nav-card-image-wrapper {
   width: 80%;
   aspect-ratio: 1 / 1;
+  border: 2px solid #e1e1e1;
+  border-radius: 2px;
+  background-color: transparent;
+  transition: background-color 0.2s ease-out;
   @apply flex items-center justify-center overflow-hidden;
+}
+
+/* Show hover color behind image when card is hovered */
+.nav-card:hover .nav-card-image-wrapper {
+  background-color: var(--card-hover-color, transparent);
 }
 
 .nav-card-image {
@@ -139,7 +160,8 @@
   background-color: hsl(0 0% 98%); /* Faintest grey */
   border: none;
   border-radius: 2px;
-  @apply text-sm text-center py-2 px-2;
+  font-size: 0.9375rem; /* 15px - slightly larger than text-sm (14px) */
+  @apply text-center py-2 px-2;
 }
 
 /* Nav Card Link/Button - Skeleton style, 80% width */
@@ -158,20 +180,31 @@
   background-color: transparent;
   border-radius: 4px;
   border: 1px solid #bbb;
+  /* Hover animation setup - uses CSS custom properties for customization */
+  --btn-hover-bg: transparent;
+  --btn-hover-color: #333;
+  --btn-hover-border: #888;
+  transition:
+    background-color 0.15s ease-out,
+    color 0.15s ease-out,
+    border-color 0.15s ease-out,
+    transform 0.15s ease-out;
 }
 
 .nav-card-link:hover {
-  color: #333;
-  border-color: #888;
+  color: var(--btn-hover-color);
+  border-color: var(--btn-hover-border);
+  background-color: var(--btn-hover-bg);
 }
 
-/* Footer - 1/4 of viewport */
+/* Footer - size to content with 5% padding */
 .home-footer {
-  height: 25vh;
+  padding: 5%;
   background-color: #fff;
   border-top: 1px solid #e1e1e1;
-  @apply w-full py-4 px-4;
+  @apply w-full;
   @apply flex flex-col justify-center;
+  flex-shrink: 0;
 }
 
 .home-footer .nav-card-section {
@@ -193,14 +226,8 @@
     @apply justify-center text-center;
     padding-right: 0;
     padding-left: 0;
-    @apply px-4;
-  }
-
-  .apps-nav-section,
-  .home-footer {
-    height: auto;
-    min-height: 25vh;
-    @apply py-6;
+    padding: 5%;
+    min-height: 100px;
   }
 
   .nav-card-section {

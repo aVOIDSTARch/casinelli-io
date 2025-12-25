@@ -16,7 +16,6 @@ import {
   type StylesKV,
   type NavCardStylesSet,
 } from '~/styles/engine';
-import { generateSquarePlaceholder } from '~/utils/placeholder-img';
 
 // Function to generate the props for the homepage components
 export default function generateHomePageProps(): HomePageProps {
@@ -50,7 +49,14 @@ export default function generateHomePageProps(): HomePageProps {
     paraText: 'Color utility tools',
     url: '/apps/color',
     navCardStylesSet,
-    imageUrl: generateSquarePlaceholder(176),
+    imageUrl: '/floral_176.png',
+    imageAlt: 'Floral pattern',
+    cardHoverColor: '#f8e0e6', // Light pink
+    buttonHoverStyles: {
+      hoverBg: '#f8e0e6',
+      hoverColor: '#9b3c5c', // Dark rose
+      hoverBorder: '#d4a5b5',
+    },
   };
 
   const appsNavCardProps2: NavCardProps = {
@@ -59,7 +65,14 @@ export default function generateHomePageProps(): HomePageProps {
     paraText: 'JSON utility tools',
     url: '/apps/jayson',
     navCardStylesSet,
-    imageUrl: generateSquarePlaceholder(176),
+    imageUrl: '/abstract_176.png',
+    imageAlt: 'Abstract pattern',
+    cardHoverColor: '#dbeafe', // Light blue
+    buttonHoverStyles: {
+      hoverBg: '#dbeafe',
+      hoverColor: '#1e40af', // Dark blue
+      hoverBorder: '#93c5fd',
+    },
   };
 
   const appsNavCardProps3: NavCardProps = {
@@ -68,7 +81,14 @@ export default function generateHomePageProps(): HomePageProps {
     paraText: 'Theme builder and previewer',
     url: '/apps/theme-ui',
     navCardStylesSet,
-    imageUrl: generateSquarePlaceholder(176),
+    imageUrl: '/geometric_176.png',
+    imageAlt: 'Geometric pattern',
+    cardHoverColor: '#ede9fe', // Light purple
+    buttonHoverStyles: {
+      hoverBg: '#ede9fe',
+      hoverColor: '#5b21b6', // Dark purple
+      hoverBorder: '#c4b5fd',
+    },
   };
 
   // Create the props for the NavCardSection component in the AppsNavSection
@@ -79,7 +99,7 @@ export default function generateHomePageProps(): HomePageProps {
 
   // Create the props for the AppsNavSection component
   const appsNavSectionProps: AppsNavSectionProps = {
-    title: 'Apps',
+    title: '',
     stylesKV: styles.sections.appsNav.container,
     navCardSectionProps: appsNavCardSectionProps,
   };

@@ -20,6 +20,11 @@ const NavCardSection: Component<NavCardSectionProps> = (props) => {
             buttonText={propsSet.buttonText}
             url={propsSet.url}
             navCardStylesSet={propsSet.navCardStylesSet}
+            imageUrl={propsSet.imageUrl}
+            imageAlt={propsSet.imageAlt}
+            accentColor={propsSet.accentColor}
+            cardHoverColor={propsSet.cardHoverColor}
+            buttonHoverStyles={propsSet.buttonHoverStyles}
           />
         )}
       </For>

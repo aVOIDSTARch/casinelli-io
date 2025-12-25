@@ -1,4 +1,4 @@
-import { type Component } from 'solid-js';
+import { type Component, Show } from 'solid-js';
 import NavCardSection, { NavCardSectionProps } from './NavCardSection';
 import { StylesKV } from '~/utils/stylesKV';
 
@@ -11,13 +11,15 @@ export interface AppsNavSectionProps {
 const AppsNavSection: Component<AppsNavSectionProps> = (props) => {
   return (
     <section classList={props.stylesKV}>
-      {props.title && <h2>{props.title}</h2>}
-      {props.navCardSectionProps && (
+      <Show when={props.title}>
+        <h2>{props.title}</h2>
+      </Show>
+      <Show when={props.navCardSectionProps}>
         <NavCardSection
-          navAreaStyles={props.navCardSectionProps.navAreaStyles}
-          navCardPropsSet={props.navCardSectionProps.navCardPropsSet}
+          navAreaStyles={props.navCardSectionProps!.navAreaStyles}
+          navCardPropsSet={props.navCardSectionProps!.navCardPropsSet}
         />
-      )}
+      </Show>
     </section>
   );
 };
