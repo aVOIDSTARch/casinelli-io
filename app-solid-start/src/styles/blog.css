@@ -1,5 +1,5 @@
 /* Blog Page Styles - Skeleton CSS Aesthetic */
-@import "tailwindcss";
+
 /* Main page container */
 .blog-page {
   @apply min-h-screen flex flex-col;

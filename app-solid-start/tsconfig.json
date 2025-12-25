@@ -12,6 +12,7 @@
     "strict": true,
     "types": ["vinxi/types/client","node"],
     "isolatedModules": true,
+    "skipLibCheck": true,
     "paths": {
       "~/*": ["./src/*"]
     }

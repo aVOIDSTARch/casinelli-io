@@ -1,5 +1,5 @@
 /* Homepage Component Styles */
-@import "tailwindcss";
+
 /* Main page container */
 .homepage {
   @apply min-h-screen flex flex-col;
