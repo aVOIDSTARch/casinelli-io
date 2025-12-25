@@ -51,11 +51,13 @@ export default function generateHomePageProps(): HomePageProps {
     navCardStylesSet,
     imageUrl: '/floral_176.png',
     imageAlt: 'Floral pattern',
-    cardHoverColor: '#d9e0ed', // Light navy
+    cardHoverColor: '#4F772D', // Green (under image)
     buttonHoverStyles: {
-      hoverBg: '#d9e0ed',
-      hoverColor: '#00296B', // Dark navy
-      hoverBorder: '#8095b8',
+      cardHoverBg: '#dce8d3', // Light green (card hover)
+      cardHoverBorder: '#90a97a',
+      hoverBg: '#4F772D', // Full green (button hover)
+      hoverColor: '#ffffff',
+      hoverBorder: '#4F772D',
     },
   };
 
@@ -67,11 +69,13 @@ export default function generateHomePageProps(): HomePageProps {
     navCardStylesSet,
     imageUrl: '/abstract_176.png',
     imageAlt: 'Abstract pattern',
-    cardHoverColor: '#fef6d9', // Light gold
+    cardHoverColor: '#FDC500', // Gold (under image)
     buttonHoverStyles: {
-      hoverBg: '#fef6d9',
-      hoverColor: '#b38b00', // Dark gold
-      hoverBorder: '#e6b300',
+      cardHoverBg: '#fef6d9', // Light gold (card hover)
+      cardHoverBorder: '#e6b300',
+      hoverBg: '#FDC500', // Full gold (button hover)
+      hoverColor: '#3d2e00',
+      hoverBorder: '#FDC500',
     },
   };
 
@@ -83,11 +87,13 @@ export default function generateHomePageProps(): HomePageProps {
     navCardStylesSet,
     imageUrl: '/geometric_176.png',
     imageAlt: 'Geometric pattern',
-    cardHoverColor: '#d9e4f0', // Light blue
+    cardHoverColor: '#004E89', // Medium blue (under image)
     buttonHoverStyles: {
-      hoverBg: '#d9e4f0',
-      hoverColor: '#004E89', // Medium blue
-      hoverBorder: '#6699bb',
+      cardHoverBg: '#d9e4f0', // Light blue (card hover)
+      cardHoverBorder: '#6699bb',
+      hoverBg: '#004E89', // Full blue (button hover)
+      hoverColor: '#ffffff',
+      hoverBorder: '#004E89',
     },
   };
 

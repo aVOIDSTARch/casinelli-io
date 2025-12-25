@@ -11,11 +11,15 @@ export interface NavCardStylesSet {
 
 /** Custom hover styles for individual button effects */
 export interface ButtonHoverStyles {
-  /** Background color on hover */
+  /** Background color when card is hovered (lighter version) */
+  cardHoverBg?: string;
+  /** Border color when card is hovered */
+  cardHoverBorder?: string;
+  /** Background color when button is hovered (full color) */
   hoverBg?: string;
-  /** Text color on hover */
+  /** Text color when button is hovered */
   hoverColor?: string;
-  /** Border color on hover */
+  /** Border color when button is hovered */
   hoverBorder?: string;
 }
 
@@ -50,6 +54,14 @@ const NavCard: Component<NavCardProps> = (props) => {
   // Build button style with CSS custom properties for hover effects
   const buttonStyle = createMemo((): JSX.CSSProperties => {
     const styles: JSX.CSSProperties = {};
+    // Card hover styles (lighter version)
+    if (props.buttonHoverStyles?.cardHoverBg) {
+      styles['--btn-card-hover-bg'] = props.buttonHoverStyles.cardHoverBg;
+    }
+    if (props.buttonHoverStyles?.cardHoverBorder) {
+      styles['--btn-card-hover-border'] = props.buttonHoverStyles.cardHoverBorder;
+    }
+    // Button hover styles (full color)
     if (props.buttonHoverStyles?.hoverBg) {
       styles['--btn-hover-bg'] = props.buttonHoverStyles.hoverBg;
     }

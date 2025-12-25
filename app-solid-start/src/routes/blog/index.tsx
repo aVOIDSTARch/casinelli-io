@@ -1,5 +1,5 @@
-import TestPage from "~/components/testing/test-page";
+import BlogLandingPage from '~/components/blog/BlogLandingPage';
 
-export default function App() {
-    return <TestPage name="BLOG" />;
+export default function BlogPage() {
+  return <BlogLandingPage />;
 }

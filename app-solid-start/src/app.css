@@ -3,6 +3,7 @@
 @import './styles/blog.css';
 @import './styles/common.css';
 @import './styles/homepage.css';
+@import './styles/layout.css';
 @import './styles/mission.css';
 @import './styles/skeleton.css';
 @plugin 'daisyui';
