@@ -51,24 +51,26 @@ const HomePage: Component<HomePageProps> = (rawProps) => {
 
   return (
     <div classList={props.mainDivStylesKV}>
-      <HomeHeader
-        text={props.headerProps.text}
-        stylesKV={props.headerProps.stylesKV}
-      />
-      <HomeTitle
-        title={props.titleProps.title}
-        stylesKV={props.titleProps.stylesKV}
-      />
-      <AppsNavSection
-        title={props.appsNavSectionProps.title}
-        stylesKV={props.appsNavSectionProps.stylesKV}
-        navCardSectionProps={props.appsNavSectionProps.navCardSectionProps}
-      />
-      <HomeFooter
-        text={props.footerProps.text}
-        stylesKV={props.footerProps.stylesKV}
-        navCardSectionProps={props.footerProps.navCardSectionProps}
-      />
+      <div class="homepage-content">
+        <HomeHeader
+          text={props.headerProps.text}
+          stylesKV={props.headerProps.stylesKV}
+        />
+        <HomeTitle
+          title={props.titleProps.title}
+          stylesKV={props.titleProps.stylesKV}
+        />
+        <AppsNavSection
+          title={props.appsNavSectionProps.title}
+          stylesKV={props.appsNavSectionProps.stylesKV}
+          navCardSectionProps={props.appsNavSectionProps.navCardSectionProps}
+        />
+        <HomeFooter
+          text={props.footerProps.text}
+          stylesKV={props.footerProps.stylesKV}
+          navCardSectionProps={props.footerProps.navCardSectionProps}
+        />
+      </div>
     </div>
   );
 };

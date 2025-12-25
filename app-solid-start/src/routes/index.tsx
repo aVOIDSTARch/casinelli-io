@@ -1,9 +1,14 @@
 import HomePage from '~/components/homepage/homePageIndex';
 import generateHomePageProps from '~/components/homepage/HomePagePropsGen';
-
-// Use imported module function that creates
-const homePageProps = generateHomePageProps;
+import PageMetaData from '~/components/PageMetaData';
 
 export default function Home() {
-  return <HomePage {...homePageProps} />;
+  const homePageProps = generateHomePageProps();
+
+  return (
+    <>
+      <PageMetaData pageProps={homePageProps.pageProps} />
+      <HomePage {...homePageProps} />
+    </>
+  );
 }

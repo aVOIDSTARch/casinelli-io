@@ -16,6 +16,7 @@ import {
   type StylesKV,
   type NavCardStylesSet,
 } from '~/styles/engine';
+import { generateSquarePlaceholder } from '~/utils/placeholder-img';
 
 // Function to generate the props for the homepage components
 export default function generateHomePageProps(): HomePageProps {
@@ -49,6 +50,7 @@ export default function generateHomePageProps(): HomePageProps {
     paraText: 'Color utility tools',
     url: '/apps/color',
     navCardStylesSet,
+    imageUrl: generateSquarePlaceholder(176),
   };
 
   const appsNavCardProps2: NavCardProps = {
@@ -57,6 +59,7 @@ export default function generateHomePageProps(): HomePageProps {
     paraText: 'JSON utility tools',
     url: '/apps/jayson',
     navCardStylesSet,
+    imageUrl: generateSquarePlaceholder(176),
   };
 
   const appsNavCardProps3: NavCardProps = {
@@ -65,6 +68,7 @@ export default function generateHomePageProps(): HomePageProps {
     paraText: 'Theme builder and previewer',
     url: '/apps/theme-ui',
     navCardStylesSet,
+    imageUrl: generateSquarePlaceholder(176),
   };
 
   // Create the props for the NavCardSection component in the AppsNavSection

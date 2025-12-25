@@ -14,19 +14,46 @@ export interface NavCardProps {
   url?: string;
   key: number;
   navCardStylesSet: NavCardStylesSet;
+  imageUrl?: string;
+  imageAlt?: string;
+  accentColor?: string;
 }
 
 const NavCard: Component<NavCardProps> = (props) => {
   const showPara = createMemo(() => Boolean(props.paraText));
+  const showImage = createMemo(() => Boolean(props.imageUrl));
 
   return (
     <section classList={props.navCardStylesSet.navCardStyles}>
-      <A href={props.url || '#'} classList={props.navCardStylesSet.buttonStyles}>
-        {props.buttonText}
-      </A>
-      <Show when={showPara()}>
-        <p classList={props.navCardStylesSet.paraStyles}>{props.paraText}</p>
-      </Show>
+      {/* Accent color strip at top */}
+      <div
+        class="nav-card-accent"
+        style={{ 'background-color': props.accentColor || '#e1e1e1' }}
+      />
+
+      {/* Card content container */}
+      <div class="nav-card-content">
+        {/* Image */}
+        <Show when={showImage()}>
+          <div class="nav-card-image-wrapper">
+            <img
+              src={props.imageUrl}
+              alt={props.imageAlt || props.buttonText || 'Card image'}
+              class="nav-card-image"
+            />
+          </div>
+        </Show>
+
+        {/* Paragraph */}
+        <Show when={showPara()}>
+          <p classList={props.navCardStylesSet.paraStyles}>{props.paraText}</p>
+        </Show>
+
+        {/* Button */}
+        <A href={props.url || '#'} classList={props.navCardStylesSet.buttonStyles}>
+          {props.buttonText}
+        </A>
+      </div>
     </section>
   );
 };
