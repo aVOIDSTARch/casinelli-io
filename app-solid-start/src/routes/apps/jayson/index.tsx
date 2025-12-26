@@ -1,14 +1,11 @@
 import { SiteLayout } from '~/components/layout';
+import JaysonApp from '~/components/apps/jayson/JaysonApp';
 
-export default function JaysonApp() {
+export default function JaysonPage() {
   return (
     <SiteLayout fullWidth>
-      <div class="jayson-app p-4">
-        <h1 class="text-2xl font-light mb-4" style={{ 'font-family': 'Raleway, sans-serif' }}>
-          Jayson - JSON Tools
-        </h1>
-        <p class="text-gray-600">JSON utility application content goes here.</p>
-        {/* Full app UI will be rendered in this space */}
+      <div class="p-4 md:p-6">
+        <JaysonApp />
       </div>
     </SiteLayout>
   );

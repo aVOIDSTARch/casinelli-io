@@ -1,7 +1,7 @@
 import { type Component, type JSX, onMount } from 'solid-js';
 import SideNav, { type NavItem } from './SideNav';
 import HomeHeader from '~/components/homepage/HomeHeader';
-import HomeTitle from '~/components/homepage/HomeTitle';
+
 
 export interface SiteLayoutProps {
   /** Page content to render in main area */

@@ -41,7 +41,7 @@
   border-right: 1px solid #e1e1e1;
   /* original spacing: large top offset so nav sits below the banner/header */
   padding-top: 300px;
-  padding-left: 50px;
+  padding-left: 25px;
   @apply flex flex-col gap-1;
 }
 
@@ -130,6 +130,7 @@ body.home-exit .side-nav-placeholder {
   --nav-hover-border: #4F772D;
   --nav-active-border: #4F772D;
   --nav-active-color: #4F772D;
+  width: 175px;
 }
 
 .side-nav-link[data-color='gold'] {
@@ -137,6 +138,15 @@ body.home-exit .side-nav-placeholder {
   --nav-hover-border: #FDC500;
   --nav-active-border: #FDC500;
   --nav-active-color: #b38b00;
+  width: 175px;
+}
+
+.side-nav-link[data-color='gold']:hover {
+  background-color: #fef6d9;
+  border-left-color: #FDC500;
+  color: #333;
+  transform: translateX(6px);
+  width: 175px;
 }
 
 .side-nav-link[data-color='blue'] {
@@ -144,28 +154,12 @@ body.home-exit .side-nav-placeholder {
   --nav-hover-border: #004E89;
   --nav-active-border: #004E89;
   --nav-active-color: #004E89;
+  width: 175px;
 }
 
-/* Submenu styles for Apps (indented links) */
-.nav-item { position: relative; }
 
-.side-nav .sub-link {
-  padding-left: 2.25rem; /* slightly indented */
-  display: block;
-  opacity: 0;
-  transform: translateY(-6px);
-  max-height: 0;
-  height: 0;
-  overflow: hidden;
-  transition: opacity 220ms ease, transform 220ms cubic-bezier(.2,.9,.2,1), max-height 260ms ease, height 260ms ease;
-}
 
-.side-nav .sub-link.open {
-  opacity: 1;
-  transform: translateY(0);
-  max-height: 48px; /* allows single-line links to expand */
-  height: 48px;
-}
+
 
 .side-nav-label {
   cursor: default;

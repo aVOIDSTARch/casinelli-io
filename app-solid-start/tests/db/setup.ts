@@ -6,8 +6,12 @@ import { config } from "dotenv";
 config({ path: ".env.local" });
 config({ path: ".env" });
 
-// Test data prefix for easy identification (lowercase, no underscores for slug constraints)
-export const TEST_PREFIX = "vitest-";
+// Test data prefix for easy identification
+// Slugs allow: lowercase letters, numbers, hyphens
+// Usernames allow: lowercase letters, numbers, underscores
+export const TEST_PREFIX = "vitest";
+export const TEST_SLUG_PREFIX = "vitest-";
+export const TEST_USERNAME_PREFIX = "vitest_";
 
 // Test data IDs stored globally for cleanup
 export interface TestDataIds {
@@ -55,7 +59,7 @@ export async function createTestUser(): Promise<string> {
     throw new Error("Supabase URL or SERVICE_ROLE_KEY not set");
   }
 
-  const testEmail = `${TEST_PREFIX}user@test.local`;
+  const testEmail = `${TEST_PREFIX}_user@test.local`;
   const password = "TestPassword123!";
 
   const response = await fetch(`${supabaseUrl}/auth/v1/admin/users`, {
@@ -70,8 +74,8 @@ export async function createTestUser(): Promise<string> {
       password,
       email_confirm: true,
       user_metadata: {
-        display_name: `${TEST_PREFIX}User`,
-        username: `${TEST_PREFIX}user`,
+        display_name: `${TEST_PREFIX}_User`,
+        username: `${TEST_USERNAME_PREFIX}user`,
       },
     }),
   });
@@ -145,9 +149,9 @@ export async function setupTestData(): Promise<TestDataIds> {
   await prisma.public_users.update({
     where: { id: userId },
     data: {
-      username: `${TEST_PREFIX}user`,
-      display_name: `${TEST_PREFIX}User`,
-      bio: `${TEST_PREFIX}Bio - This is a test user for Vitest`,
+      username: `${TEST_USERNAME_PREFIX}user`,
+      display_name: `${TEST_PREFIX}_User`,
+      bio: `${TEST_PREFIX}_Bio - This is a test user for Vitest`,
       website: "https://test.example.com",
     },
   });
@@ -155,9 +159,9 @@ export async function setupTestData(): Promise<TestDataIds> {
   // 2. Create test category
   const category = await prisma.categories.create({
     data: {
-      name: `${TEST_PREFIX}Category`,
-      slug: `${TEST_PREFIX}category`,
-      description: `${TEST_PREFIX}Category for testing`,
+      name: `${TEST_PREFIX}_Category`,
+      slug: `${TEST_SLUG_PREFIX}category`,
+      description: `${TEST_PREFIX}_Category for testing`,
     },
   });
   testDataIds.categoryId = category.id;
@@ -165,16 +169,16 @@ export async function setupTestData(): Promise<TestDataIds> {
   // 3. Create test tags
   const tag1 = await prisma.tags.create({
     data: {
-      name: `${TEST_PREFIX}Tag1`,
-      slug: `${TEST_PREFIX}tag1`,
-      description: `${TEST_PREFIX}First test tag`,
+      name: `${TEST_PREFIX}_Tag1`,
+      slug: `${TEST_SLUG_PREFIX}tag1`,
+      description: `${TEST_PREFIX}_First test tag`,
     },
   });
   const tag2 = await prisma.tags.create({
     data: {
-      name: `${TEST_PREFIX}Tag2`,
-      slug: `${TEST_PREFIX}tag2`,
-      description: `${TEST_PREFIX}Second test tag`,
+      name: `${TEST_PREFIX}_Tag2`,
+      slug: `${TEST_SLUG_PREFIX}tag2`,
+      description: `${TEST_PREFIX}_Second test tag`,
     },
   });
   testDataIds.tagIds = [tag1.id, tag2.id];
@@ -182,9 +186,9 @@ export async function setupTestData(): Promise<TestDataIds> {
   // 4. Create test series
   const series = await prisma.series.create({
     data: {
-      name: `${TEST_PREFIX}Series`,
-      slug: `${TEST_PREFIX}series`,
-      description: `${TEST_PREFIX}Test series for blog posts`,
+      name: `${TEST_PREFIX}_Series`,
+      slug: `${TEST_SLUG_PREFIX}series`,
+      description: `${TEST_PREFIX}_Test series for blog posts`,
       total_parts: 3,
       author_id: userId,
     },
@@ -194,11 +198,11 @@ export async function setupTestData(): Promise<TestDataIds> {
   // 5. Create test post
   const post = await prisma.posts.create({
     data: {
-      title: `${TEST_PREFIX}Post`,
-      slug: `${TEST_PREFIX}post`,
-      description: `${TEST_PREFIX}Test post description`,
-      excerpt: `${TEST_PREFIX}Test post excerpt for display`,
-      content: `# ${TEST_PREFIX}Post\n\nThis is test content for the Vitest test suite.\n\n## Section 1\n\nSome test content here.\n\n## Section 2\n\nMore test content.`,
+      title: `${TEST_PREFIX}_Post`,
+      slug: `${TEST_SLUG_PREFIX}post`,
+      description: `${TEST_PREFIX}_Test post description`,
+      excerpt: `${TEST_PREFIX}_Test post excerpt for display`,
+      content: `# ${TEST_PREFIX}_Post\n\nThis is test content for the Vitest test suite.\n\n## Section 1\n\nSome test content here.\n\n## Section 2\n\nMore test content.`,
       content_format: "markdown",
       author_id: userId,
       series_id: series.id,
@@ -245,8 +249,8 @@ export async function setupTestData(): Promise<TestDataIds> {
   await prisma.post_seo.create({
     data: {
       post_id: post.id,
-      meta_title: `${TEST_PREFIX}Post - SEO Title`,
-      meta_description: `${TEST_PREFIX}Meta description for SEO testing`,
+      meta_title: `${TEST_PREFIX}_Post - SEO Title`,
+      meta_description: `${TEST_PREFIX}_Meta description for SEO testing`,
       focus_keyword: "test vitest prisma",
     },
   });
@@ -256,7 +260,7 @@ export async function setupTestData(): Promise<TestDataIds> {
     data: {
       post_id: post.id,
       author_id: userId,
-      content: `${TEST_PREFIX}This is a test comment`,
+      content: `${TEST_PREFIX}_This is a test comment`,
       content_format: "plaintext",
       status: "approved",
     },
@@ -266,9 +270,9 @@ export async function setupTestData(): Promise<TestDataIds> {
   // 11. Create test badge
   const badge = await prisma.badges.create({
     data: {
-      type: `${TEST_PREFIX.toLowerCase()}badge`,
-      label: `${TEST_PREFIX}Badge`,
-      description: `${TEST_PREFIX}A test badge for Vitest`,
+      type: `${TEST_SLUG_PREFIX}badge`,
+      label: `${TEST_PREFIX}_Badge`,
+      description: `${TEST_PREFIX}_A test badge for Vitest`,
       icon: "🧪",
       color: "#9333ea",
     },
@@ -374,7 +378,7 @@ export async function cleanupOrphanedTestData(): Promise<void> {
   try {
     // Delete orphaned posts by slug pattern
     const orphanedPosts = await prisma.posts.findMany({
-      where: { slug: { startsWith: TEST_PREFIX } },
+      where: { slug: { startsWith: TEST_SLUG_PREFIX } },
       select: { id: true },
     });
     for (const post of orphanedPosts) {
@@ -385,27 +389,27 @@ export async function cleanupOrphanedTestData(): Promise<void> {
       await prisma.comments.deleteMany({ where: { post_id: post.id } });
     }
     await prisma.posts.deleteMany({
-      where: { slug: { startsWith: TEST_PREFIX } },
+      where: { slug: { startsWith: TEST_SLUG_PREFIX } },
     });
 
     // Delete orphaned series
     await prisma.series.deleteMany({
-      where: { slug: { startsWith: TEST_PREFIX } },
+      where: { slug: { startsWith: TEST_SLUG_PREFIX } },
     });
 
     // Delete orphaned tags
     await prisma.tags.deleteMany({
-      where: { slug: { startsWith: TEST_PREFIX } },
+      where: { slug: { startsWith: TEST_SLUG_PREFIX } },
     });
 
     // Delete orphaned categories
     await prisma.categories.deleteMany({
-      where: { slug: { startsWith: TEST_PREFIX } },
+      where: { slug: { startsWith: TEST_SLUG_PREFIX } },
     });
 
     // Delete orphaned badges
     await prisma.badges.deleteMany({
-      where: { type: { startsWith: TEST_PREFIX } },
+      where: { type: { startsWith: TEST_SLUG_PREFIX } },
     });
 
     // Delete orphaned test users via Supabase

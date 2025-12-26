@@ -6,6 +6,8 @@ import {
   cleanupTestData,
   testDataIds,
   TEST_PREFIX,
+  TEST_SLUG_PREFIX,
+  TEST_USERNAME_PREFIX,
 } from "./setup";
 import type { PrismaClient } from "@prisma/client";
 
@@ -47,8 +49,8 @@ describe("Database Connection & Setup", () => {
         where: { id: testDataIds.userId },
       });
       expect(user).toBeDefined();
-      expect(user?.username).toBe(`${TEST_PREFIX}user`);
-      expect(user?.display_name).toBe(`${TEST_PREFIX}User`);
+      expect(user?.username).toBe(`${TEST_USERNAME_PREFIX}user`);
+      expect(user?.display_name).toBe(`${TEST_PREFIX}_User`);
     });
 
     it("should link public user to auth user", async () => {
@@ -64,9 +66,9 @@ describe("Database Connection & Setup", () => {
     it("should update user profile", async () => {
       const updatedUser = await prisma.public_users.update({
         where: { id: testDataIds.userId },
-        data: { bio: `${TEST_PREFIX}Updated bio` },
+        data: { bio: `${TEST_PREFIX}_Updated bio` },
       });
-      expect(updatedUser.bio).toBe(`${TEST_PREFIX}Updated bio`);
+      expect(updatedUser.bio).toBe(`${TEST_PREFIX}_Updated bio`);
     });
 
     it("should find user by email", async () => {
@@ -84,13 +86,13 @@ describe("Database Connection & Setup", () => {
         where: { id: testDataIds.categoryId },
       });
       expect(category).toBeDefined();
-      expect(category?.name).toBe(`${TEST_PREFIX}Category`);
-      expect(category?.slug).toBe(`${TEST_PREFIX}category`);
+      expect(category?.name).toBe(`${TEST_PREFIX}_Category`);
+      expect(category?.slug).toBe(`${TEST_SLUG_PREFIX}category`);
     });
 
     it("should find category by slug", async () => {
       const category = await prisma.categories.findUnique({
-        where: { slug: `${TEST_PREFIX}category` },
+        where: { slug: `${TEST_SLUG_PREFIX}category` },
       });
       expect(category).toBeDefined();
       expect(category?.id).toBe(testDataIds.categoryId);
@@ -99,8 +101,8 @@ describe("Database Connection & Setup", () => {
     it("should support nested categories", async () => {
       const childCategory = await prisma.categories.create({
         data: {
-          name: `${TEST_PREFIX}ChildCategory`,
-          slug: `${TEST_PREFIX}childcategory`,
+          name: `${TEST_PREFIX}_ChildCategory`,
+          slug: `${TEST_SLUG_PREFIX}childcategory`,
           parent_id: testDataIds.categoryId,
         },
       });
@@ -128,10 +130,10 @@ describe("Database Connection & Setup", () => {
 
     it("should find tag by slug", async () => {
       const tag = await prisma.tags.findUnique({
-        where: { slug: `${TEST_PREFIX}tag1` },
+        where: { slug: `${TEST_SLUG_PREFIX}tag1` },
       });
       expect(tag).toBeDefined();
-      expect(tag?.name).toBe(`${TEST_PREFIX}Tag1`);
+      expect(tag?.name).toBe(`${TEST_PREFIX}_Tag1`);
     });
 
     it("should update tag post count", async () => {
@@ -149,7 +151,7 @@ describe("Database Connection & Setup", () => {
         where: { id: testDataIds.seriesId },
       });
       expect(series).toBeDefined();
-      expect(series?.name).toBe(`${TEST_PREFIX}Series`);
+      expect(series?.name).toBe(`${TEST_PREFIX}_Series`);
       expect(series?.total_parts).toBe(3);
     });
 
@@ -177,13 +179,13 @@ describe("Database Connection & Setup", () => {
         where: { id: testDataIds.postId },
       });
       expect(post).toBeDefined();
-      expect(post?.title).toBe(`${TEST_PREFIX}Post`);
+      expect(post?.title).toBe(`${TEST_PREFIX}_Post`);
       expect(post?.status).toBe("draft");
     });
 
     it("should find post by slug", async () => {
       const post = await prisma.posts.findUnique({
-        where: { slug: `${TEST_PREFIX}post` },
+        where: { slug: `${TEST_SLUG_PREFIX}post` },
       });
       expect(post).toBeDefined();
       expect(post?.id).toBe(testDataIds.postId);
@@ -228,7 +230,7 @@ describe("Database Connection & Setup", () => {
       const publishedPosts = await prisma.posts.findMany({
         where: {
           status: "published",
-          slug: { startsWith: TEST_PREFIX.toLowerCase() },
+          slug: { startsWith: TEST_SLUG_PREFIX },
         },
       });
       expect(publishedPosts.length).toBeGreaterThan(0);
@@ -281,7 +283,7 @@ describe("Database Connection & Setup", () => {
         where: { post_id: testDataIds.postId },
       });
       expect(seo).toBeDefined();
-      expect(seo?.meta_title).toContain(TEST_PREFIX);
+      expect(seo?.meta_title).toContain(`${TEST_PREFIX}_`);
       expect(seo?.focus_keyword).toBe("test vitest prisma");
     });
 
@@ -304,7 +306,7 @@ describe("Database Connection & Setup", () => {
         where: { id: testDataIds.commentId },
       });
       expect(comment).toBeDefined();
-      expect(comment?.content).toContain(TEST_PREFIX);
+      expect(comment?.content).toContain(`${TEST_PREFIX}_`);
       expect(comment?.status).toBe("approved");
     });
 
@@ -328,7 +330,7 @@ describe("Database Connection & Setup", () => {
           root_id: testDataIds.commentId,
           depth: 1,
           author_id: testDataIds.userId,
-          content: `${TEST_PREFIX}This is a reply`,
+          content: `${TEST_PREFIX}_This is a reply`,
           content_format: "plaintext",
           status: "approved",
         },
@@ -354,7 +356,7 @@ describe("Database Connection & Setup", () => {
         where: { id: testDataIds.badgeId },
       });
       expect(badge).toBeDefined();
-      expect(badge?.label).toBe(`${TEST_PREFIX}Badge`);
+      expect(badge?.label).toBe(`${TEST_PREFIX}_Badge`);
       expect(badge?.icon).toBe("🧪");
     });
 
@@ -367,7 +369,7 @@ describe("Database Connection & Setup", () => {
         include: { badges: true },
       });
       expect(userBadge).toBeDefined();
-      expect(userBadge?.badges.label).toBe(`${TEST_PREFIX}Badge`);
+      expect(userBadge?.badges.label).toBe(`${TEST_PREFIX}_Badge`);
     });
 
     it("should list user badges", async () => {
@@ -432,15 +434,15 @@ describe("Database Connection & Setup", () => {
         await prisma.$transaction(async (tx) => {
           await tx.tags.create({
             data: {
-              name: `${TEST_PREFIX}TransactionTag`,
-              slug: `${TEST_PREFIX.toLowerCase()}transactiontag`,
+              name: `${TEST_PREFIX}_TransactionTag`,
+              slug: `${TEST_SLUG_PREFIX}transactiontag`,
             },
           });
           // Force an error by creating duplicate slug
           await tx.tags.create({
             data: {
-              name: `${TEST_PREFIX}TransactionTag2`,
-              slug: `${TEST_PREFIX.toLowerCase()}transactiontag`,
+              name: `${TEST_PREFIX}_TransactionTag2`,
+              slug: `${TEST_SLUG_PREFIX}transactiontag`,
             },
           });
         });
@@ -452,7 +454,7 @@ describe("Database Connection & Setup", () => {
 
       // Verify rollback - tag should not exist
       const tag = await prisma.tags.findUnique({
-        where: { slug: `${TEST_PREFIX.toLowerCase()}transactiontag` },
+        where: { slug: `${TEST_SLUG_PREFIX}transactiontag` },
       });
       expect(tag).toBeNull();
     });
@@ -496,7 +498,7 @@ describe("Database Connection & Setup", () => {
         where: { id: testDataIds.userId },
       });
       expect(authUser).toBeDefined();
-      expect(authUser?.email).toContain(TEST_PREFIX.toLowerCase());
+      expect(authUser?.email).toContain(TEST_PREFIX);
     });
 
     it("should join across schemas", async () => {
@@ -504,7 +506,7 @@ describe("Database Connection & Setup", () => {
         where: { id: testDataIds.userId },
         include: { users: true },
       });
-      expect(publicUser?.users.email).toContain(TEST_PREFIX.toLowerCase());
+      expect(publicUser?.users.email).toContain(TEST_PREFIX);
     });
   });
 
