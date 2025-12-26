@@ -47,6 +47,7 @@
 /* Blog Landing Page */
 .blog-landing {
   @apply flex flex-col gap-6;
+  margin: 0 50px;
 }
 
 .blog-posts-grid {

@@ -1,8 +1,7 @@
-import { SiteLayout } from '~/components/layout';
+import { HomeLayout } from '~/components/layout';
 import generateHomePageProps from '~/components/homepage/HomePagePropsGen';
 import PageMetaData from '~/components/PageMetaData';
-import AppsNavSection from '~/components/homepage/AppsNavSection';
-import HomeFooter from '~/components/homepage/HomeFooter';
+import HomePage from '~/components/homepage/homePageIndex';
 
 export default function Home() {
   const homePageProps = generateHomePageProps();
@@ -10,20 +9,9 @@ export default function Home() {
   return (
     <>
       <PageMetaData pageProps={homePageProps.pageProps} />
-      <SiteLayout>
-        <div class="home-content">
-          <AppsNavSection
-            title={homePageProps.appsNavSectionProps?.title}
-            stylesKV={homePageProps.appsNavSectionProps?.stylesKV}
-            navCardSectionProps={homePageProps.appsNavSectionProps?.navCardSectionProps}
-          />
-          <HomeFooter
-            text={homePageProps.footerProps?.text}
-            stylesKV={homePageProps.footerProps?.stylesKV}
-            navCardSectionProps={homePageProps.footerProps?.navCardSectionProps}
-          />
-        </div>
-      </SiteLayout>
+      <HomeLayout fullWidth>
+        <HomePage {...homePageProps} />
+      </HomeLayout>
     </>
   );
 }

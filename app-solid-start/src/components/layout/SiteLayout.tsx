@@ -1,6 +1,7 @@
-import { type Component, type JSX } from 'solid-js';
-import TopBanner from './TopBanner';
+import { type Component, type JSX, onMount } from 'solid-js';
 import SideNav, { type NavItem } from './SideNav';
+import HomeHeader from '~/components/homepage/HomeHeader';
+import HomeTitle from '~/components/homepage/HomeTitle';
 
 export interface SiteLayoutProps {
   /** Page content to render in main area */
@@ -14,18 +15,34 @@ export interface SiteLayoutProps {
 }
 
 const SiteLayout: Component<SiteLayoutProps> = (props) => {
+  onMount(() => {
+    // Clear any homepage exit class when navigating to other pages
+    try {
+      document.body.classList.remove('home-exit');
+    } catch (e) {
+      /* ignore */
+    }
+  });
   return (
     <div class="site-layout">
-      <TopBanner title={props.title} />
-      <div class="layout-body">
-        <SideNav items={props.sideNavItems} />
-        <main class="main-content">
-          <div class={props.fullWidth ? 'content-full' : 'content-container'}>
-            {props.children}
+      <SideNav items={props.sideNavItems} />
+      <main class="main-content">
+
+        <div class="layout-body">
+
+          <div class="content-full">
+            <section class="app-container">
+              <HomeHeader
+                stylesKV={{ 'home-header': true }}
+                titleProps={{ title: 'casinelli.io', stylesKV: { 'home-title': true } }}
+              />
+              {props.children}
+            </section>
           </div>
-        </main>
+        </div>
+      </main>
+
       </div>
-    </div>
   );
 };
 

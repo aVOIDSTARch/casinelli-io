@@ -55,10 +55,7 @@ const HomePage: Component<HomePageProps> = (rawProps) => {
         <HomeHeader
           text={props.headerProps.text}
           stylesKV={props.headerProps.stylesKV}
-        />
-        <HomeTitle
-          title={props.titleProps.title}
-          stylesKV={props.titleProps.stylesKV}
+          titleProps={props.titleProps}
         />
         <AppsNavSection
           title={props.appsNavSectionProps.title}

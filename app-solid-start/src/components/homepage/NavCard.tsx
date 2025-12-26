@@ -1,5 +1,5 @@
 import { Show, type Component, createMemo } from 'solid-js';
-import { A } from '@solidjs/router';
+import { A, useNavigate, useLocation } from '@solidjs/router';
 import type { JSX } from 'solid-js';
 import { StylesKV } from '~/utils/stylesKV';
 
@@ -41,6 +41,8 @@ export interface NavCardProps {
 const NavCard: Component<NavCardProps> = (props) => {
   const showPara = createMemo(() => Boolean(props.paraText));
   const showImage = createMemo(() => Boolean(props.imageUrl));
+  const loc = useLocation();
+  const navigate = useNavigate();
 
   // Build card style with CSS custom property for hover color
   const cardStyle = createMemo((): JSX.CSSProperties => {
@@ -105,6 +107,17 @@ const NavCard: Component<NavCardProps> = (props) => {
           href={props.url || '#'}
           classList={props.navCardStylesSet.buttonStyles}
           style={buttonStyle()}
+          onClick={(e) => {
+            // Only intercept when on homepage and navigating internally
+            if (loc.pathname === '/' && props.url && props.url.startsWith('/')) {
+              e.preventDefault();
+              document.body.classList.add('home-exit');
+              // Delay navigation to allow CSS animation to run
+              setTimeout(() => {
+                navigate(props.url as string);
+              }, 480);
+            }
+          }}
         >
           {props.buttonText}
         </A>

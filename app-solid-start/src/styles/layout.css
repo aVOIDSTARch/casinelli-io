@@ -2,7 +2,7 @@
 
 /* Main layout container */
 .site-layout {
-  @apply min-h-screen flex flex-col;
+  @apply min-h-screen flex flex-row;
   max-width: 1536px;
   margin-left: auto;
   margin-right: auto;
@@ -16,38 +16,16 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
   }
 }
-
-/* Top Banner */
-.top-banner {
-  @apply w-full flex flex-col;
-  background-color: #fff;
-  border-bottom: 1px solid #e1e1e1;
+.main-content {
+  max-width: 1050px;
+  width: 100%;
+  margin-left: 0;
+  margin-right: auto;
+  @apply flex-1 flex flex-col;
+  min-height: 100vh;
+  transition: padding 420ms ease;
 }
-
-/* Banner title row */
-.banner-title {
-  @apply w-full flex items-center justify-center;
-  padding: 1.5rem 2rem;
-  font-family: 'Raleway', 'HelveticaNeue', 'Helvetica Neue', Helvetica, Arial,
-    sans-serif;
-  font-size: 2.5rem;
-  line-height: 1.2;
-  letter-spacing: -0.05rem;
-  font-weight: 200;
-  color: #222;
-  text-decoration: none;
-  transition: color 0.15s ease-out;
-}
-
-.banner-title:hover {
-  color: #555;
-}
-
-@media (min-width: 768px) {
-  .banner-title {
-    font-size: 3rem;
-  }
-}
+/* Header is now provided by `HomeHeader`/`HomeTitle` (homepage styles) */
 
 /* Main content wrapper (side nav + content) */
 .layout-body {
@@ -56,14 +34,54 @@
 
 /* Side Navigation */
 .side-nav {
-  width: 180px;
+  width: 240px;
+  min-height: 100vh;
   flex-shrink: 0;
   background-color: #fff;
   border-right: 1px solid #e1e1e1;
-  padding: 1.5rem 0;
+  /* original spacing: large top offset so nav sits below the banner/header */
+  padding-top: 300px;
+  padding-left: 50px;
   @apply flex flex-col gap-1;
 }
 
+/* Desktop inner gutters that sit next to main content (250px each) */
+.content-side {
+  width: 250px;
+  flex-shrink: 0;
+  display: block;
+}
+
+/* hide the inner gutters on small screens so content becomes full-width */
+@media (max-width: 768px) {
+  .content-side {
+    display: none;
+  }
+}
+
+/* Placeholder side-nav used only on homepage animation */
+.side-nav-placeholder {
+  width: 250px;
+  flex-shrink: 0;
+  background-color: #fff;
+  border-right: 1px solid #e1e1e1;
+  position: relative;
+  transform: translateX(-250px);
+  opacity: 0;
+  z-index: 20;
+}
+
+@keyframes sideNavSlideIn {
+  from { transform: translateX(-250px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+body.home-exit .side-nav-placeholder {
+  animation: sideNavSlideIn 480ms cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+
+/* Side nav links */
 .side-nav-link {
   display: block;
   padding: 0.75rem 1.5rem;
@@ -74,10 +92,9 @@
   text-decoration: none;
   background-color: transparent;
   border-left: 3px solid transparent;
-  transition:
-    background-color 0.15s ease-out,
-    color 0.15s ease-out,
-    border-color 0.15s ease-out;
+  cursor: pointer;
+  will-change: transform, opacity;
+  transition: background-color 180ms ease, color 180ms ease, border-color 180ms ease, transform 180ms cubic-bezier(.2,.9,.2,1);
   /* CSS custom properties for hover colors */
   --nav-hover-bg: #f5f5f5;
   --nav-hover-border: #ddd;
@@ -90,6 +107,7 @@
   background-color: var(--nav-hover-bg);
   border-left-color: var(--nav-hover-border);
   color: #333;
+  transform: translateX(6px);
 }
 
 .side-nav-link.active {
@@ -97,6 +115,13 @@
   border-left-color: var(--nav-active-border);
   color: var(--nav-active-color);
   font-weight: 600;
+  /* keep active state visually distinct without moving the item */
+  transform: none;
+}
+
+.side-nav-link:focus-visible {
+  outline: 2px solid rgba(34,34,34,0.12);
+  outline-offset: 2px;
 }
 
 /* Colored hover variants for side nav */
@@ -121,11 +146,34 @@
   --nav-active-color: #004E89;
 }
 
-/* Main content area */
-.main-content {
-  @apply flex-1 flex flex-col;
-  min-height: 0;
-  background-color: #fff;
+/* Submenu styles for Apps (indented links) */
+.nav-item { position: relative; }
+
+.side-nav .sub-link {
+  padding-left: 2.25rem; /* slightly indented */
+  display: block;
+  opacity: 0;
+  transform: translateY(-6px);
+  max-height: 0;
+  height: 0;
+  overflow: hidden;
+  transition: opacity 220ms ease, transform 220ms cubic-bezier(.2,.9,.2,1), max-height 260ms ease, height 260ms ease;
+}
+
+.side-nav .sub-link.open {
+  opacity: 1;
+  transform: translateY(0);
+  max-height: 48px; /* allows single-line links to expand */
+  height: 48px;
+}
+
+.side-nav-label {
+  cursor: default;
+  background: transparent;
+  border: none;
+  text-align: left;
+  width: 100%;
+  padding: 0.75rem 1.5rem;
 }
 
 /* Content container with max-width for readability */
@@ -140,8 +188,14 @@
 
 /* Full-width content (for apps) */
 .content-full {
-  @apply flex-1 w-full;
+  @apply flex-1 w-full flex-row;
   padding: 0;
+  box-shadow: #555 0px 0px 12px -6px  ;
+}
+
+.app-container {
+  @apply w-full h-full flex flex-col;
+  min-height: 100vh
 }
 
 /* Mobile responsive */
@@ -151,7 +205,7 @@
   }
 
   .layout-body {
-    @apply flex-col;
+    @apply w-full h-full flex flex-col;
   }
 
   .banner-title {

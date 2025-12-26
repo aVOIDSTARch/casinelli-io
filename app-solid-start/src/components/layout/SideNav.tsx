@@ -33,14 +33,16 @@ const SideNav: Component<SideNavProps> = (props) => {
     <nav class="side-nav">
       <For each={navItems()}>
         {(item) => (
-          <A
-            href={item.href}
-            class="side-nav-link"
-            classList={{ active: isActive(item.href) }}
-            data-color={item.color}
-          >
-            {item.label}
-          </A>
+          <div class="nav-item">
+            <A
+              href={item.href}
+              class="side-nav-link"
+              classList={{ active: isActive(item.href) }}
+              data-color={item.color}
+            >
+              {item.label}
+            </A>
+          </div>
         )}
       </For>
     </nav>

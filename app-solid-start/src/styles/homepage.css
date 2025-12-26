@@ -18,6 +18,15 @@
   }
 }
 
+.main-content {
+  max-width: 1050px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  @apply flex-1 flex flex-col;
+  min-height: 100vh;
+  transition: padding 420ms ease;
+}
 /* Inner content container - max 850px for readable content width */
 .homepage-content {
   max-width: 850px;
@@ -25,7 +34,27 @@
   margin-left: auto;
   margin-right: auto;
   @apply flex-1 flex flex-col;
+  min-height: 100vh;
+  transition: padding 420ms ease;
 }
+
+/* Homepage exit state: shrink title, hide header, show placeholder nav */
+/* Use transform + opacity for smooth, one-directional animation
+   Animating height or font-size can cause layout reflow and "jumps".
+   We'll scale the title and translate the header for a GPU-accelerated effect. */
+
+@keyframes homeHeaderFade {
+  from { opacity: 1; transform: translateY(0); }
+  to { opacity: 0; transform: translateY(-10px); }
+}
+
+
+body.home-exit .home-header {
+  will-change: transform, opacity;
+  animation: homeHeaderFade 420ms cubic-bezier(.2,.9,.2,1) forwards;
+}
+
+/* Title animation removed to keep header/title rendering identical across pages */
 
 /* Header - size to content with 5% padding */
 .home-header {
@@ -35,6 +64,7 @@
   @apply text-4xl md:text-6xl font-bold;
   color: #222;
   flex-shrink: 0;
+  transition: opacity 420ms ease, height 420ms ease, padding 420ms ease;
 }
 
 /* Title - takes remaining viewport space, text right-aligned, vertically centered */

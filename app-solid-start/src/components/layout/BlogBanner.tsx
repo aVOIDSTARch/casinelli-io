@@ -1,15 +1,15 @@
 import { type Component } from 'solid-js';
 import { A } from '@solidjs/router';
 
-export interface TopBannerProps {
+export interface BlogBannerProps {
   title?: string;
 }
 
-const TopBanner: Component<TopBannerProps> = (props) => {
+const BlogBanner: Component<BlogBannerProps> = (props) => {
   const title = () => props.title ?? 'casinelli.io';
 
   return (
-    <header class="top-banner">
+    <header class="blog-banner">
       <A href="/" class="banner-title">
         {title()}
       </A>
@@ -17,4 +17,4 @@ const TopBanner: Component<TopBannerProps> = (props) => {
   );
 };
 
-export default TopBanner;
+export default BlogBanner;

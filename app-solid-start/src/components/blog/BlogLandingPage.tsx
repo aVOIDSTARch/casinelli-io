@@ -1,5 +1,4 @@
 import { type Component, For } from 'solid-js';
-import { SiteLayout } from '~/components/layout';
 import BlogPreviewCard from './BlogPreviewCard';
 
 // Tri-color scheme for rotating accent colors
@@ -38,35 +37,33 @@ const BlogLandingPage: Component = () => {
   };
 
   return (
-    <SiteLayout>
-      <div class="blog-landing">
-        <h1
-          class="text-3xl font-light mb-6"
-          style={{ 'font-family': 'Raleway, sans-serif' }}
-        >
-          Blog
-        </h1>
+    <div class="blog-landing">
+      <h1
+        class="text-3xl font-light mb-6"
+        style={{ 'font-family': 'Raleway, sans-serif' }}
+      >
+        Blog
+      </h1>
 
-        <div class="blog-posts-grid">
-          <For each={posts}>
-            {(post, index) => {
-              const colors = getColorForIndex(index());
-              return (
-                <BlogPreviewCard
-                  title={post.title}
-                  slug={post.slug}
-                  excerpt={post.excerpt || undefined}
-                  date={post.published_at || undefined}
-                  readTime={post.reading_time_minutes || undefined}
-                  accentColor={colors.accent}
-                  hoverColor={colors.hover}
-                />
-              );
-            }}
-          </For>
-        </div>
+      <div class="blog-posts-grid">
+        <For each={posts}>
+          {(post, index) => {
+            const colors = getColorForIndex(index());
+            return (
+              <BlogPreviewCard
+                title={post.title}
+                slug={post.slug}
+                excerpt={post.excerpt || undefined}
+                date={post.published_at || undefined}
+                readTime={post.reading_time_minutes || undefined}
+                accentColor={colors.accent}
+                hoverColor={colors.hover}
+              />
+            );
+          }}
+        </For>
       </div>
-    </SiteLayout>
+    </div>
   );
 };
 

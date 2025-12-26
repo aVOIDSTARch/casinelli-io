@@ -4,16 +4,23 @@
   "scripts": {
     "dev": "vinxi dev",
     "build": "vinxi build",
-    "start": "vinxi start"
+    "start": "vinxi start",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:db": "vitest run tests/db",
+    "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
     "@solidjs/meta": "^0.29.4",
     "@solidjs/router": "^0.15.0",
     "@solidjs/start": "^1.1.0",
+    "@supabase/supabase-js": "^2.89.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "dotenv": "^17.2.3",
+    "pg": "^8.16.3",
     "solid-js": "^1.9.5",
     "supabase-cli": "^0.0.21",
     "tailwind-merge": "^3.4.0",
