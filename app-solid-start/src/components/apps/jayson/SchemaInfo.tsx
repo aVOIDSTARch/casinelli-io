@@ -124,14 +124,14 @@ const SchemaInfoViewer: Component = () => {
         <For each={SCHEMA_LIST}>
           {(name) => (
             <button
-              class={`btn btn-sm ${selectedSample() === name ? 'btn-primary' : 'btn-outline'}`}
+              class={`btn btn-sm ${selectedSample() === name ? 'btn-primary' : 'bg-white border-gray-400 hover:bg-gray-100 text-gray-700'}`}
               onClick={() => loadSampleSchema(name)}
             >
               {name}
             </button>
           )}
         </For>
-        <button class="btn btn-sm btn-ghost" onClick={clear}>
+        <button class="btn btn-sm bg-white border-gray-400 hover:bg-gray-100 text-gray-700" onClick={clear}>
           Clear
         </button>
       </div>
@@ -141,23 +141,23 @@ const SchemaInfoViewer: Component = () => {
         onChange={setSchema}
         label="JSON Schema"
         placeholder="Paste a JSON Schema to analyze..."
-        rows={10}
+        minRows={15}
       />
 
       <Show when={schemaInfo()}>
-        <div class="bg-base-100 border rounded-lg divide-y">
+        <div class="bg-white border border-gray-300 rounded-lg divide-y divide-gray-200">
           {/* Header */}
-          <div class="p-4">
-            <h4 class="text-xl font-semibold">{schemaInfo()!.title}</h4>
+          <div class="p-6">
+            <h4 class="text-2xl font-semibold">{schemaInfo()!.title}</h4>
             <Show when={schemaInfo()!.description}>
-              <p class="text-gray-600 mt-1">{schemaInfo()!.description}</p>
+              <p class="text-gray-600 mt-2 text-base">{schemaInfo()!.description}</p>
             </Show>
-            <div class="flex gap-4 mt-3 text-sm">
-              <span class="badge badge-outline">Type: {schemaInfo()!.rootType}</span>
-              <span class="badge badge-outline">
+            <div class="flex gap-4 mt-4 text-base">
+              <span class="badge badge-outline badge-lg">Type: {schemaInfo()!.rootType}</span>
+              <span class="badge badge-outline badge-lg">
                 {schemaInfo()!.properties.length} properties
               </span>
-              <span class="badge badge-outline">
+              <span class="badge badge-outline badge-lg">
                 {schemaInfo()!.requiredFields.length} required
               </span>
             </div>
@@ -165,43 +165,43 @@ const SchemaInfoViewer: Component = () => {
 
           {/* Properties Table */}
           <Show when={schemaInfo()!.properties.length > 0}>
-            <div class="overflow-x-auto">
-              <table class="table table-sm">
+            <div class="overflow-x-auto p-4">
+              <table class="table table-lg w-full">
                 <thead>
-                  <tr class="bg-base-200">
-                    <th>Property</th>
-                    <th>Type</th>
-                    <th>Required</th>
-                    <th>Description</th>
-                    <th>Constraints</th>
+                  <tr class="bg-gray-100 text-base">
+                    <th class="py-4 px-6">Property</th>
+                    <th class="py-4 px-6">Type</th>
+                    <th class="py-4 px-6">Required</th>
+                    <th class="py-4 px-6">Description</th>
+                    <th class="py-4 px-6">Constraints</th>
                   </tr>
                 </thead>
                 <tbody>
                   <For each={schemaInfo()!.properties}>
                     {(prop) => (
-                      <tr>
-                        <td class="font-mono text-sm font-medium">{prop.name}</td>
-                        <td>
-                          <code class="text-xs bg-base-200 px-2 py-1 rounded">
+                      <tr class="hover:bg-gray-50">
+                        <td class="font-mono text-base font-medium py-4 px-6">{prop.name}</td>
+                        <td class="py-4 px-6">
+                          <code class="text-sm bg-gray-200 px-3 py-1.5 rounded">
                             {prop.type}
                           </code>
                         </td>
-                        <td>
+                        <td class="py-4 px-6">
                           {prop.required ? (
-                            <span class="badge badge-error badge-sm">Required</span>
+                            <span class="badge badge-error">Required</span>
                           ) : (
-                            <span class="badge badge-ghost badge-sm">Optional</span>
+                            <span class="badge badge-ghost">Optional</span>
                           )}
                         </td>
-                        <td class="text-sm text-gray-600 max-w-xs truncate">
+                        <td class="text-base text-gray-600 max-w-xs py-4 px-6">
                           {prop.description || '-'}
                         </td>
-                        <td class="text-xs">
+                        <td class="text-sm py-4 px-6">
                           <Show when={prop.constraints.length > 0} fallback="-">
-                            <div class="flex flex-wrap gap-1">
+                            <div class="flex flex-wrap gap-2">
                               <For each={prop.constraints}>
                                 {(c) => (
-                                  <span class="badge badge-info badge-xs">{c}</span>
+                                  <span class="badge badge-info">{c}</span>
                                 )}
                               </For>
                             </div>

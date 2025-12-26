@@ -192,10 +192,10 @@ const DataTransformer: Component = () => {
       </div>
 
       <div class="flex gap-2 flex-wrap">
-        <button class="btn btn-sm btn-outline" onClick={loadSample}>
+        <button class="btn btn-sm bg-white border-gray-400 hover:bg-gray-100 text-gray-700" onClick={loadSample}>
           Load Sample Data
         </button>
-        <button class="btn btn-sm btn-ghost" onClick={clear}>
+        <button class="btn btn-sm bg-white border-gray-400 hover:bg-gray-100 text-gray-700" onClick={clear}>
           Clear
         </button>
       </div>
@@ -208,18 +208,18 @@ const DataTransformer: Component = () => {
         }}
         label="Input Data (JSON Array)"
         placeholder='[{"id": 1, "name": "Item 1"}, ...]'
-        rows={8}
+        minRows={15}
       />
 
       {/* Operation Selection */}
-      <div class="p-4 bg-base-200 rounded-lg space-y-4">
+      <div class="p-4 bg-gray-200 rounded-lg space-y-4">
         <div class="flex items-center gap-2 flex-wrap">
-          <span class="text-sm font-medium">Operation:</span>
+          <span class="text-sm font-medium text-gray-700">Operation:</span>
           <div class="join">
             <For each={['extract', 'filter', 'transform', 'sort'] as TransformOperation[]}>
               {(op) => (
                 <button
-                  class={`btn btn-sm join-item ${operation() === op ? 'btn-primary' : 'btn-outline'}`}
+                  class={`btn btn-sm join-item ${operation() === op ? 'btn-primary' : 'bg-white border-gray-400 text-gray-700'}`}
                   onClick={() => setOperation(op)}
                 >
                   {op.charAt(0).toUpperCase() + op.slice(1)}
@@ -318,13 +318,13 @@ const DataTransformer: Component = () => {
 
             <div class="join">
               <button
-                class={`btn btn-sm join-item ${sortOrder() === 'asc' ? 'btn-primary' : 'btn-outline'}`}
+                class={`btn btn-sm join-item ${sortOrder() === 'asc' ? 'btn-primary' : 'bg-white border-gray-400 text-gray-700'}`}
                 onClick={() => setSortOrder('asc')}
               >
                 Ascending
               </button>
               <button
-                class={`btn btn-sm join-item ${sortOrder() === 'desc' ? 'btn-primary' : 'btn-outline'}`}
+                class={`btn btn-sm join-item ${sortOrder() === 'desc' ? 'btn-primary' : 'bg-white border-gray-400 text-gray-700'}`}
                 onClick={() => setSortOrder('desc')}
               >
                 Descending

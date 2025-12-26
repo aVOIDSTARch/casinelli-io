@@ -134,20 +134,20 @@ const TemplateGenerator: Component = () => {
         <For each={SCHEMA_LIST}>
           {(name) => (
             <button
-              class={`btn btn-sm ${selectedSample() === name ? 'btn-primary' : 'btn-outline'}`}
+              class={`btn btn-sm ${selectedSample() === name ? 'btn-primary' : 'bg-white border-gray-400 hover:bg-gray-100 text-gray-700'}`}
               onClick={() => loadSampleSchema(name)}
             >
               {name}
             </button>
           )}
         </For>
-        <button class="btn btn-sm btn-ghost" onClick={clear}>
+        <button class="btn btn-sm bg-white border-gray-400 hover:bg-gray-100 text-gray-700" onClick={clear}>
           Clear
         </button>
       </div>
 
       {/* Options */}
-      <div class="flex gap-6 p-4 bg-base-200 rounded-lg">
+      <div class="flex gap-6 p-4 bg-gray-200 rounded-lg">
         <label class="flex items-center gap-2 cursor-pointer">
           <input
             type="checkbox"
@@ -173,7 +173,7 @@ const TemplateGenerator: Component = () => {
         onChange={setSchema}
         label="JSON Schema"
         placeholder="Paste a JSON Schema to generate a template..."
-        rows={10}
+        minRows={15}
       />
 
       <div class="flex justify-center">

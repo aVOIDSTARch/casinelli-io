@@ -1,4 +1,4 @@
-import { type Component, type Setter, createSignal, createEffect } from 'solid-js';
+import { type Component, type Setter, createSignal, createEffect, onMount } from 'solid-js';
 
 export interface JsonEditorProps {
   /** Current JSON string value */
@@ -9,8 +9,8 @@ export interface JsonEditorProps {
   placeholder?: string;
   /** Label for the editor */
   label?: string;
-  /** Number of rows for textarea */
-  rows?: number;
+  /** Minimum number of rows for textarea */
+  minRows?: number;
   /** Whether to show format button */
   showFormat?: boolean;
   /** Whether the editor is read-only */
@@ -20,6 +20,33 @@ export interface JsonEditorProps {
 const JsonEditor: Component<JsonEditorProps> = (props) => {
   const [error, setError] = createSignal<string | null>(null);
   const [isValid, setIsValid] = createSignal(true);
+  let textareaRef: HTMLTextAreaElement | undefined;
+
+  // Auto-resize textarea based on content
+  const adjustHeight = () => {
+    if (textareaRef) {
+      // Reset height to auto to get correct scrollHeight
+      textareaRef.style.height = 'auto';
+      // Calculate minimum height based on minRows (default 10)
+      const lineHeight = 20; // approximate line height in pixels
+      const minHeight = (props.minRows ?? 10) * lineHeight;
+      // Set height to max of scrollHeight or minHeight
+      const newHeight = Math.max(textareaRef.scrollHeight, minHeight);
+      textareaRef.style.height = `${newHeight}px`;
+    }
+  };
+
+  onMount(() => {
+    adjustHeight();
+  });
+
+  // Adjust height when value changes
+  createEffect(() => {
+    // Access value to track it
+    props.value;
+    // Use setTimeout to ensure DOM has updated
+    setTimeout(adjustHeight, 0);
+  });
 
   // Validate JSON on value change
   createEffect(() => {
@@ -91,13 +118,17 @@ const JsonEditor: Component<JsonEditorProps> = (props) => {
         </div>
       )}
       <textarea
-        class={`textarea textarea-bordered w-full font-mono text-sm ${
-          !isValid() ? 'textarea-error' : ''
+        ref={textareaRef}
+        class={`textarea textarea-bordered w-full font-mono text-sm bg-white text-gray-900 resize-none overflow-hidden ${
+          !isValid() ? 'textarea-error' : 'border-gray-300'
         }`}
-        rows={props.rows ?? 10}
+        style={{ 'min-height': `${(props.minRows ?? 10) * 20}px` }}
         placeholder={props.placeholder ?? 'Paste or type JSON here...'}
         value={props.value}
-        onInput={(e) => props.onChange(e.currentTarget.value)}
+        onInput={(e) => {
+          props.onChange(e.currentTarget.value);
+          adjustHeight();
+        }}
         readOnly={props.readOnly}
         spellcheck={false}
       />

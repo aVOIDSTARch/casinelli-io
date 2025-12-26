@@ -255,31 +255,31 @@ const TypeGenerator: Component = () => {
         <For each={SCHEMA_LIST}>
           {(name) => (
             <button
-              class={`btn btn-sm ${selectedSample() === name ? 'btn-primary' : 'btn-outline'}`}
+              class={`btn btn-sm ${selectedSample() === name ? 'btn-primary' : 'bg-white border-gray-400 hover:bg-gray-100 text-gray-700'}`}
               onClick={() => loadSampleSchema(name)}
             >
               {name}
             </button>
           )}
         </For>
-        <button class="btn btn-sm btn-ghost" onClick={clear}>
+        <button class="btn btn-sm bg-white border-gray-400 hover:bg-gray-100 text-gray-700" onClick={clear}>
           Clear
         </button>
       </div>
 
       {/* Options */}
-      <div class="flex gap-6 p-4 bg-base-200 rounded-lg flex-wrap">
+      <div class="flex gap-6 p-4 bg-gray-200 rounded-lg flex-wrap">
         <div class="flex items-center gap-2">
-          <span class="text-sm text-gray-500">Output:</span>
+          <span class="text-sm text-gray-700">Output:</span>
           <div class="join">
             <button
-              class={`btn btn-sm join-item ${format() === 'typescript' ? 'btn-primary' : 'btn-outline'}`}
+              class={`btn btn-sm join-item ${format() === 'typescript' ? 'btn-primary' : 'bg-white border-gray-400 text-gray-700'}`}
               onClick={() => setFormat('typescript')}
             >
               TypeScript
             </button>
             <button
-              class={`btn btn-sm join-item ${format() === 'javascript' ? 'btn-primary' : 'btn-outline'}`}
+              class={`btn btn-sm join-item ${format() === 'javascript' ? 'btn-primary' : 'bg-white border-gray-400 text-gray-700'}`}
               onClick={() => setFormat('javascript')}
             >
               JavaScript
@@ -288,16 +288,16 @@ const TypeGenerator: Component = () => {
         </div>
 
         <div class="flex items-center gap-2">
-          <span class="text-sm text-gray-500">Export:</span>
+          <span class="text-sm text-gray-700">Export:</span>
           <div class="join">
             <button
-              class={`btn btn-sm join-item ${exportStyle() === 'named' ? 'btn-primary' : 'btn-outline'}`}
+              class={`btn btn-sm join-item ${exportStyle() === 'named' ? 'btn-primary' : 'bg-white border-gray-400 text-gray-700'}`}
               onClick={() => setExportStyle('named')}
             >
               Named
             </button>
             <button
-              class={`btn btn-sm join-item ${exportStyle() === 'default' ? 'btn-primary' : 'btn-outline'}`}
+              class={`btn btn-sm join-item ${exportStyle() === 'default' ? 'btn-primary' : 'bg-white border-gray-400 text-gray-700'}`}
               onClick={() => setExportStyle('default')}
             >
               Default
@@ -311,7 +311,7 @@ const TypeGenerator: Component = () => {
         onChange={setSchema}
         label="JSON Schema"
         placeholder="Paste a JSON Schema to generate types..."
-        rows={10}
+        minRows={15}
       />
 
       <Show when={generatedCode()}>

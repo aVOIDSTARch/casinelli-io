@@ -18,7 +18,7 @@ const TABS: Tab[] = [
   {
     id: 'validate',
     label: 'Validate',
-    icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z',
+    icon: 'M5 13l4 4L19 7',
     description: 'Validate JSON data against a schema',
   },
   {
@@ -79,7 +79,7 @@ const JaysonApp: Component = () => {
             <p class="text-gray-600 max-w-2xl">
               A comprehensive JSON Schema toolkit for validation, type generation, and data transformation.
               Built on the{' '}
-              <code class="bg-base-200 px-1 rounded text-sm">@casinelli/jayson</code>{' '}
+              <code class="bg-gray-200 px-1 rounded text-sm">@casinelli/jayson</code>{' '}
               library supporting JSON Schema drafts 04, 06, 07, 2019-09, and 2020-12.
             </p>
           </div>
@@ -88,7 +88,7 @@ const JaysonApp: Component = () => {
               href="https://json-schema.org/"
               target="_blank"
               rel="noopener noreferrer"
-              class="btn btn-lg btn-outline gap-2 text-base"
+              class="btn btn-lg bg-white border-gray-400 hover:bg-gray-100 text-gray-700 gap-2 text-base"
             >
               <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
@@ -104,22 +104,24 @@ const JaysonApp: Component = () => {
         <For each={TABS}>
           {(tab) => (
             <button
-              class={`p-4 rounded-lg border transition-all text-left ${
+              class={`p-4 rounded-lg border transition-all ${
                 activeTab() === tab.id
                   ? 'bg-primary text-primary-foreground border-primary shadow-md'
                   : 'bg-white border-gray-300 hover:border-gray-400 hover:bg-gray-50'
               }`}
               onClick={() => setActiveTab(tab.id)}
             >
-              <div class="flex items-center gap-2 mb-2">
-                <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div class="flex flex-col items-center justify-center gap-2">
+                <svg
+                  class={`w-6 h-6 ${activeTab() === tab.id ? 'text-primary-foreground' : 'text-primary'}`}
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d={tab.icon} />
                 </svg>
-                <span class="font-medium">{tab.label}</span>
+                <span class="font-medium text-sm">{tab.label}</span>
               </div>
-              <p class={`text-xs leading-relaxed ${activeTab() === tab.id ? 'text-primary-foreground/80' : 'text-gray-500'}`}>
-                {tab.description}
-              </p>
             </button>
           )}
         </For>

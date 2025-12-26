@@ -54,7 +54,19 @@ const SchemaValidator: Component = () => {
     if (schemaType) {
       const types = Array.isArray(schemaType) ? schemaType : [schemaType];
       const actualType = getJsonType(data);
-      if (!types.includes(actualType) && !(types.includes('null') && data === null)) {
+
+      // Check if type matches (handle integer as a subset of number)
+      const typeMatches = types.some((t) => {
+        if (t === 'integer') {
+          return actualType === 'number' && Number.isInteger(data);
+        }
+        if (t === 'number') {
+          return actualType === 'number';
+        }
+        return t === actualType;
+      });
+
+      if (!typeMatches && !(types.includes('null') && data === null)) {
         errors.push({
           path: path || '$',
           message: `Expected type "${types.join(' | ')}" but got "${actualType}"`,
@@ -221,13 +233,13 @@ const SchemaValidator: Component = () => {
       </div>
 
       <div class="flex gap-2 flex-wrap">
-        <button class="btn btn-sm btn-outline" onClick={() => loadSample('valid')}>
+        <button class="btn btn-sm bg-white border-gray-400 hover:bg-gray-100 text-gray-700" onClick={() => loadSample('valid')}>
           Load Valid Sample
         </button>
-        <button class="btn btn-sm btn-outline" onClick={() => loadSample('invalid')}>
+        <button class="btn btn-sm bg-white border-gray-400 hover:bg-gray-100 text-gray-700" onClick={() => loadSample('invalid')}>
           Load Invalid Sample
         </button>
-        <button class="btn btn-sm btn-ghost" onClick={clear}>
+        <button class="btn btn-sm bg-white border-gray-400 hover:bg-gray-100 text-gray-700" onClick={clear}>
           Clear All
         </button>
       </div>
@@ -238,14 +250,14 @@ const SchemaValidator: Component = () => {
           onChange={setSchema}
           label="JSON Schema"
           placeholder='{"type": "object", "properties": {...}}'
-          rows={12}
+          minRows={15}
         />
         <JsonEditor
           value={data()}
           onChange={setData}
           label="Data to Validate"
           placeholder='{"name": "John", "age": 30}'
-          rows={12}
+          minRows={15}
         />
       </div>
 
