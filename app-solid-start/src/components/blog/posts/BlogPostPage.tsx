@@ -1,29 +1,10 @@
 import { type Component, Show } from 'solid-js';
-import { useParams } from '@solidjs/router';
 import { SiteLayout } from '~/components/layout';
+import type { BlogPost } from '~/lib/blog-api';
 
-interface BlogPost {
-  id: string;
-  title: string;
-  slug: string;
-  content: string | null;
-  excerpt: string | null;
-  published_at: string | null;
-  reading_time_minutes: number | null;
+interface BlogPostPageProps {
+  post: BlogPost | null | undefined;
 }
-
-// Static placeholder posts - replace with your data source
-const PLACEHOLDER_POSTS: Record<string, BlogPost> = {
-  'coming-soon': {
-    id: '1',
-    title: 'Coming Soon',
-    slug: 'coming-soon',
-    content: '<p>Blog posts are coming soon. Check back later for updates!</p>',
-    excerpt: 'Blog posts are coming soon.',
-    published_at: new Date().toISOString(),
-    reading_time_minutes: 1,
-  },
-};
 
 function formatDate(dateString: string): string {
   const date = new Date(dateString);
@@ -34,14 +15,11 @@ function formatDate(dateString: string): string {
   });
 }
 
-const BlogPostPage: Component = () => {
-  const params = useParams();
-  const post = () => PLACEHOLDER_POSTS[params.slug] || null;
-
+const BlogPostPage: Component<BlogPostPageProps> = (props) => {
   return (
     <SiteLayout>
       <div class="blog-post-page">
-        <Show when={!post()}>
+        <Show when={!props.post}>
           <div class="blog-post-not-found">
             <h1
               class="text-2xl font-light mb-4"
@@ -61,7 +39,7 @@ const BlogPostPage: Component = () => {
           </div>
         </Show>
 
-        <Show when={post()}>
+        <Show when={props.post}>
           {(postData) => (
             <>
               <article class="blog-post-article">

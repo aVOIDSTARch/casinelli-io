@@ -2,15 +2,20 @@
   "name": "casinelli-io",
   "type": "module",
   "scripts": {
-    "dev": "vinxi dev",
+    "dev": "concurrently -n app,blog -c blue,green \"vinxi dev\" \"npx blog-server\"",
+    "dev:app": "vinxi dev",
+    "dev:blog": "npx blog-server",
     "build": "vinxi build",
-    "start": "vinxi start",
+    "start": "concurrently -n app,blog -c blue,green \"vinxi start\" \"npx blog-server\"",
+    "start:app": "vinxi start",
     "test": "vitest run",
     "test:watch": "vitest",
     "test:db": "vitest run tests/db",
+    "test:blog": "vitest run tests/blog",
     "test:coverage": "vitest run --coverage"
   },
   "dependencies": {
+    "@casinelli/blog-server": "^1.1.0",
     "@casinelli/jayson": "^1.0.1",
     "@prisma/adapter-pg": "^7.2.0",
     "@prisma/client": "^7.2.0",
@@ -31,6 +36,7 @@
   "devDependencies": {
     "@tailwindcss/vite": "^4.0.7",
     "@types/node": "^25.0.3",
+    "concurrently": "^9.2.1",
     "daisyui": "^5.5.14",
     "prettier": "^3.7.4",
     "prettier-plugin-tailwindcss": "^0.7.2",
