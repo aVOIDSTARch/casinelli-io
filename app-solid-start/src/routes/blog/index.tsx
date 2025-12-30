@@ -1,6 +1,8 @@
 import { query, createAsync } from "@solidjs/router";
+import { Suspense } from "solid-js";
 import { SiteLayout } from '~/components/layout';
 import BlogLandingPage from '~/components/blog/BlogLandingPage';
+import { BlogGridSkeleton } from '~/components/blog/BlogSkeleton';
 import { fetchPublishedPosts, type BlogPost } from '~/lib/blog-api';
 
 const getPosts = query(async (): Promise<BlogPost[]> => {
@@ -23,7 +25,9 @@ export default function BlogPage() {
 
   return (
     <SiteLayout title="Blog">
-      <BlogLandingPage posts={posts() ?? []} />
+      <Suspense fallback={<BlogGridSkeleton count={6} />}>
+        <BlogLandingPage posts={posts() ?? []} />
+      </Suspense>
     </SiteLayout>
   );
 }
