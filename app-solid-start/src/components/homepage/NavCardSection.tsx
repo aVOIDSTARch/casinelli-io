@@ -25,6 +25,8 @@ const NavCardSection: Component<NavCardSectionProps> = (props) => {
             accentColor={propsSet.accentColor}
             cardHoverColor={propsSet.cardHoverColor}
             buttonHoverStyles={propsSet.buttonHoverStyles}
+            badge={propsSet.badge}
+            badgeVariant={propsSet.badgeVariant}
           />
         )}
       </For>

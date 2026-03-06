@@ -31,37 +31,37 @@ export const testTitleProps: HomeTitleProps = {
   stylesKV: styles.title,
 };
 
-// App navigation cards (content only, styles from engine)
-const appNavCards: NavCardProps[] = [
+// Project navigation cards (content only, styles from engine)
+const projectNavCards: NavCardProps[] = [
   {
     key: 0,
-    buttonText: 'Color',
-    paraText: 'Color utility tools',
-    url: '/apps/color',
+    buttonText: 'JaySON',
+    paraText: 'JSON Schema toolkit',
+    url: '/projects/jayson',
     navCardStylesSet,
   },
   {
     key: 1,
-    buttonText: 'Jayson',
-    paraText: 'JSON utility tools',
-    url: '/apps/jayson',
+    buttonText: 'Color',
+    paraText: 'Color utility tools',
+    url: '/projects/color',
     navCardStylesSet,
   },
   {
     key: 2,
     buttonText: 'Theme UI',
     paraText: 'Theme builder and previewer',
-    url: '/apps/theme-ui',
+    url: '/projects/theme-ui',
     navCardStylesSet,
   },
 ];
 
 export const testAppsNavSectionProps: AppsNavSectionProps = {
-  title: 'Apps',
+  title: 'Projects',
   stylesKV: styles.sections.appsNav.container,
   navCardSectionProps: {
     navAreaStyles: styles.sections.appsNav.navCardSection!.navAreaStyles,
-    navCardPropsSet: appNavCards,
+    navCardPropsSet: projectNavCards,
   },
 };
 

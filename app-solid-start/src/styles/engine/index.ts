@@ -18,6 +18,7 @@ import {
 import {
   buildHomepageStyles,
   buildAppsStyles,
+  buildProjectsStyles,
   buildBlogStyles,
   buildMissionStyles,
 } from './pageBuilders';
@@ -26,6 +27,7 @@ import {
 const builders: Record<PageName, () => PageStylesModule> = {
   [PageName.HOMEPAGE]: buildHomepageStyles,
   [PageName.APPS]: buildAppsStyles,
+  [PageName.PROJECTS]: buildProjectsStyles,
   [PageName.BLOG]: buildBlogStyles,
   [PageName.MISSION]: buildMissionStyles,
 };

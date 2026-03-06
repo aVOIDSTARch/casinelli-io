@@ -47,7 +47,12 @@ const TABS: Tab[] = [
   },
 ];
 
-const JaysonApp: Component = () => {
+interface JaysonAppProps {
+  /** Hide hero when embedded in project detail page */
+  hideHero?: boolean;
+}
+
+const JaysonApp: Component<JaysonAppProps> = (props) => {
   const [activeTab, setActiveTab] = createSignal<TabId>('validate');
 
   const renderTabContent = () => {
@@ -69,7 +74,8 @@ const JaysonApp: Component = () => {
 
   return (
     <div class="jayson-app">
-      {/* Hero Section */}
+      {/* Hero Section - hidden when embedded in project page */}
+      {!props.hideHero && (
       <div class="hero-section bg-gradient-to-br from-primary/5 to-secondary/5 rounded-lg p-6 mb-6">
         <div class="flex flex-col md:flex-row md:items-center gap-4">
           <div class="flex-1">
@@ -98,6 +104,7 @@ const JaysonApp: Component = () => {
           </div>
         </div>
       </div>
+      )}
 
       {/* Tab Navigation */}
       <div class="grid grid-cols-2 md:grid-cols-5 gap-3 mb-6">

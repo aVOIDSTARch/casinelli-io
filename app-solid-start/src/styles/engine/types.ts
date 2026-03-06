@@ -5,6 +5,7 @@ export type { StylesKV };
 export enum PageName {
   HOMEPAGE = 'homepage',
   APPS = 'apps',
+  PROJECTS = 'projects',
   BLOG = 'blog',
   MISSION = 'mission',
 }

@@ -1,0 +1,58 @@
+/* Projects Page Styles - Modern showcase */
+
+.projects-page {
+  @apply min-h-screen flex flex-col;
+  background-color: #fff;
+}
+
+.projects-hero {
+  @apply py-12 md:py-16 px-4 md:px-8 text-center;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.projects-hero h1 {
+  font-family: 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  @apply text-3xl md:text-4xl font-light text-gray-800 mb-3;
+}
+
+.projects-hero p {
+  @apply text-gray-600 text-lg max-w-2xl mx-auto;
+}
+
+.projects-content {
+  @apply w-full py-8 px-4 md:px-8 flex flex-col;
+}
+
+.projects-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-5xl mx-auto;
+}
+
+/* Project detail page */
+.project-detail-hero {
+  @apply py-8 md:py-12 px-4 md:px-8 border-b border-gray-200;
+}
+
+.project-detail-hero h1 {
+  font-family: 'Raleway', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  @apply text-3xl md:text-4xl font-light text-gray-800 mb-2;
+}
+
+.project-detail-hero p {
+  @apply text-gray-600 text-lg;
+}
+
+.project-status-badge {
+  @apply inline-block px-3 py-1 text-xs font-medium rounded-full uppercase tracking-wide mt-2;
+}
+
+.project-status-live {
+  @apply bg-emerald-100 text-emerald-800;
+}
+
+.project-status-in-development {
+  @apply bg-amber-100 text-amber-800;
+}
+
+.project-status-coming-soon {
+  @apply bg-gray-100 text-gray-600;
+}

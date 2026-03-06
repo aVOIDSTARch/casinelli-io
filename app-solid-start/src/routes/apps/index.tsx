@@ -1,17 +1,11 @@
-import { SiteLayout } from '~/components/layout';
-import AppsNavSection from '~/components/homepage/AppsNavSection';
-import generateAppsPageProps from '~/components/apps/AppsPagePropsGen';
+import { redirect } from '@solidjs/router';
 
-export default function AppsPage() {
-  const { appsNavSectionProps } = generateAppsPageProps();
+export const route = {
+  load: () => {
+    throw redirect('/projects');
+  },
+};
 
-  return (
-    <SiteLayout>
-      <AppsNavSection
-        title={appsNavSectionProps.title}
-        stylesKV={appsNavSectionProps.stylesKV}
-        navCardSectionProps={appsNavSectionProps.navCardSectionProps}
-      />
-    </SiteLayout>
-  );
+export default function AppsRedirect() {
+  return null;
 }

@@ -13,7 +13,7 @@ export interface SideNavProps {
 
 const defaultNavItems: NavItem[] = [
   { label: 'Home', href: '/', color: 'green' },
-  { label: 'Apps', href: '/apps', color: 'gold' },
+  { label: 'Projects', href: '/projects', color: 'gold' },
   { label: 'Blog', href: '/blog', color: 'blue' },
   { label: 'Mission', href: '/mission', color: 'green' },
 ];

@@ -36,6 +36,10 @@ export interface NavCardProps {
   cardHoverColor?: string;
   /** Custom button hover styles - overrides default hover effect */
   buttonHoverStyles?: ButtonHoverStyles;
+  /** Optional status badge (e.g. "Live", "Coming soon") */
+  badge?: string;
+  /** Badge variant for styling */
+  badgeVariant?: 'live' | 'in-development' | 'coming-soon';
 }
 
 const NavCard: Component<NavCardProps> = (props) => {
@@ -100,6 +104,20 @@ const NavCard: Component<NavCardProps> = (props) => {
         {/* Paragraph */}
         <Show when={showPara()}>
           <p classList={props.navCardStylesSet.paraStyles}>{props.paraText}</p>
+        </Show>
+
+        {/* Status badge */}
+        <Show when={props.badge}>
+          <span
+            class="project-status-badge"
+            classList={{
+              'project-status-live': props.badgeVariant === 'live',
+              'project-status-in-development': props.badgeVariant === 'in-development',
+              'project-status-coming-soon': props.badgeVariant === 'coming-soon',
+            }}
+          >
+            {props.badge}
+          </span>
         </Show>
 
         {/* Button with custom hover styles */}
